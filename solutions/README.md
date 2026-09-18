@@ -55,26 +55,28 @@ Expected Output:
 
 ## 📂 Directory Contents
 
+### `solutions/offline_ela_viewer.html`
+- **Instructor ELA Tool**: Standalone HTML5/Canvas client-side Error Level Analysis inspector for quick facilitator live demonstration on a projector.
+
 ### `solutions/challenge1_audio/`
-- **`solve_ch1_audio.py`**: Computes the Short-Time Fourier Transform (STFT) on `intercepted_wiretap.wav`, filters the 7 kHz–16 kHz band, applies log-power scaling, and extracts `recovered_spectrogram.png`.
-- **`walkthrough.md`**: Detailed facilitator guide for Audacity linear spectrogram settings.
-- **`solution_spectrogram.png` / `recovered_spectrogram.png`**: Reference rendered spectrogram image displaying `FLAG{SP3CTR4L_AUD10_CYPH3R}`.
+- **`solve_ch1_audio.py`**: Automated STFT spectrogram generation script that reads `intercepted_wiretap.wav` and renders `solution_spectrogram.png`.
+- **`walkthrough.md`**: Facilitator guide with Audacity linear spectrogram settings.
+- **`solution_spectrogram.png` / `spectrogram_output.png`**: Visual reference image showing the recovered wiretap cipher.
 
 ### `solutions/challenge2_video/`
-- **`solve_ch2.py`**: Loads deceleration golden frame `#090` (`16:24:32`), crops the front bumper plate, applies Unsharp Masking (`radius=2.0, percent=220, threshold=2`) and contrast adjustment (`1.8x`) to decipher `VB 698 108`.
-- **`walkthrough.md`**: Video inspection guide using VLC/FFmpeg and GIMP unsharp masking.
-- **`golden_frame_090.png`**: High-resolution 1280x720 extracted frame #090.
-- **`plate_raw_blurred_crop.png`**: Motion-blurred license plate before enhancement.
-- **`plate_deblurred_solution.png` / `recovered_plate.png`**: Enhanced, decipherable plate characters.
+- **`solve_ch2.py`**: Automated script that scans extracted frames, selects deceleration apex frame #090, crops the plate bounding box, applies unsharp mask de-blurring, and extracts the plate string.
+- **`walkthrough.md`**: Motion deceleration physics and FFmpeg extraction facilitator walkthrough.
+- **`golden_frame_090.png`**: Deceleration apex frame.
+- **`plate_deblurred_solution.png`**: High-contrast unsharp masked plate output (`VB 698 108`).
 
 ### `solutions/challenge3_ela/`
 - **`solve_ch3_ela.py`**: Re-compresses `crime_scene_evidence.jpg` at 90% JPEG quality, computes pixel difference, amplifies by 30x, and measures the 3.1x error level anomaly ratio on the staged revolver.
-- **`walkthrough.md`**: Theoretical and practical forensic guide explaining how to distinguish natural edge response (cones A/B) from true areal recompression tampering.
+- **`walkthrough.md`**: Theoretical and practical forensic guide explaining how to distinguish natural edge response (cones A/B) from true areal recompression tampering using GIMP.
 - **`reference_crime_scene_ela.png` / `crime_scene_ela_result.png`**: Reference ELA difference image highlighting the glowing staged revolver.
 
 ### `solutions/challenge4_medium_ela/`
 - **`solve_ch4_ela.py`**: Re-compresses `evidence_clearance_badge.jpg` at 90% JPEG quality, computes pixel difference, amplifies by 30x, and detects the 16x compression anomaly ratio across the forged clearance rectangle.
-- **`walkthrough.md`**: Step-by-step document forensics guide using GIMP and `offline_ela_viewer.html`.
+- **`walkthrough.md`**: Step-by-step document forensics guide using GIMP (and instructor demonstration via `solutions/offline_ela_viewer.html`).
 - **`reference_badge_ela.png` / `recovered_badge_ela.png`**: Reference ELA difference image highlighting the glowing forged clearance block.
 
 ### `solutions/challenge5_medium_audio/`

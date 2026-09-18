@@ -61,8 +61,9 @@ def prepare_downloads():
     ch4_dir = os.path.join(BASE_DIR, "challenges", "challenge4_medium_ela")
     ch5_dir = os.path.join(BASE_DIR, "challenges", "challenge5_medium_audio")
 
+    sol_dir = os.path.join(BASE_DIR, "solutions")
     os.system(f"cp {os.path.join(ch3_dir, 'crime_scene_evidence.jpg')} {PUBLIC_DIR}/crime_scene_evidence.jpg 2>/dev/null || true")
-    os.system(f"cp {os.path.join(ch3_dir, 'offline_ela_viewer.html')} {PUBLIC_DIR}/ela_tool.html 2>/dev/null || true")
+    os.system(f"cp {os.path.join(sol_dir, 'offline_ela_viewer.html')} {PUBLIC_DIR}/ela_tool.html 2>/dev/null || true")
 
     # Challenge 1 (Audio - Easy)
     build_zip_package(
@@ -89,7 +90,6 @@ def prepare_downloads():
         [
             (os.path.join(ch3_dir, "crime_scene_evidence.jpg"), "crime_scene_evidence.jpg"),
             (os.path.join(ch3_dir, "challenge3_brief.md"), "challenge3_brief.md"),
-            (os.path.join(ch3_dir, "offline_ela_viewer.html"), "offline_ela_viewer.html"),
         ]
     )
 
@@ -99,7 +99,6 @@ def prepare_downloads():
         [
             (os.path.join(ch4_dir, "evidence_clearance_badge.jpg"), "evidence_clearance_badge.jpg"),
             (os.path.join(ch4_dir, "challenge4_brief.md"), "challenge4_brief.md"),
-            (os.path.join(ch4_dir, "offline_ela_viewer.html"), "offline_ela_viewer.html"),
         ]
     )
 
@@ -123,10 +122,8 @@ def prepare_downloads():
             (os.path.join(ch2_dir, "frames"), "challenge2_video/frames"),
             (os.path.join(ch3_dir, "crime_scene_evidence.jpg"), "challenge3_ela/crime_scene_evidence.jpg"),
             (os.path.join(ch3_dir, "challenge3_brief.md"), "challenge3_brief.md"),
-            (os.path.join(ch3_dir, "offline_ela_viewer.html"), "challenge3_ela/offline_ela_viewer.html"),
             (os.path.join(ch4_dir, "evidence_clearance_badge.jpg"), "challenge4_medium_ela/evidence_clearance_badge.jpg"),
             (os.path.join(ch4_dir, "challenge4_brief.md"), "challenge4_medium_ela/challenge4_brief.md"),
-            (os.path.join(ch4_dir, "offline_ela_viewer.html"), "challenge4_medium_ela/offline_ela_viewer.html"),
             (os.path.join(ch5_dir, "covert_broadcast.wav"), "challenge5_medium_audio/covert_broadcast.wav"),
             (os.path.join(ch5_dir, "challenge5_brief.md"), "challenge5_medium_audio/challenge5_brief.md"),
             (os.path.join(BASE_DIR, "handouts", "Participant_Brief_and_CheatSheet.md"), "Participant_CheatSheet.md"),

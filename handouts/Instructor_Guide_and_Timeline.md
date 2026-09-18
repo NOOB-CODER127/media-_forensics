@@ -82,7 +82,7 @@
 - **Reveal Ch 2 & Demo 3 (1:55 – 2:05 | 10 mins):**
   - Project the de-blurred license plate solution on screen.
   - Transition to Image ELA: *"JPEG compression saves images in 8x8 pixel blocks. When an image is resaved repeatedly, compression errors stabilize. When a new element (like an evidence weapon) is digitally composited from another source and resaved, it exhibits much higher compression difference than the unedited background."*
-  - Demonstrate opening `offline_ela_viewer.html` or GIMP difference mode, and explain how to ignore natural high-contrast edges (cones A & B) and look for areal compression discrepancies.
+  - Demonstrate opening `solutions/offline_ela_viewer.html` or GIMP difference mode, and explain how to ignore natural high-contrast edges (cones A & B) and look for areal compression discrepancies.
 - **Hands-On Solving (2:05 – 2:55 | 50 mins):**
   - Participants inspect `crime_scene_evidence.jpg`.
   - **Timed Hint Ladder:**
@@ -115,6 +115,6 @@
 | :--- | :--- | :--- | :--- |
 | **Ch 1 (Easy)** | Audio Spectrogram | `FLAG{SP3CTR4L_AUD10_CYPH3R}` | **Pitfall:** Spectrogram text looks squished.<br>**Fix:** Remind them Audacity defaults to Logarithmic; they must set Scale to **Linear** in Spectrogram Settings. |
 | **Ch 2 (Med)** | Video CCTV De-blur | `FLAG{PL4T3_VB698108_CLR}`<br>*(or `VB 698 108`)* | **Pitfall:** Participant tries to read plate on blurred moving frames.<br>**Fix:** Direct them to deceleration Golden Frame **#090** and apply Unsharp Mask (radius 2.0, amount 220%). |
-| **Ch 3 (Hard)** | Crime Scene ELA | `FLAG{3L4_ST4G3D_W34P0N_R3V0LV3R}` | **Pitfall:** Getting distracted by bright edges on yellow cones A & B.<br>**Fix:** Remind them of edge frequency physics: look for high error across the *entire interior area* of an item. |
-| **Ch 4 (Med)** | Document ELA | `FLAG{3L4_R0GU3_CL34R4NC3_0V3RR1D3}` | **Pitfall:** Not seeing the glowing forged clearance block.<br>**Fix:** Advise setting amplification to 25x–30x in `offline_ela_viewer.html` and zooming into the lower-right box. |
+| **Ch 3 (Hard)** | Crime Scene ELA | `FLAG{3L4_ST4G3D_W34P0N_R3V0LV3R}` | **Pitfall:** Getting distracted by bright edges on yellow cones A & B.<br>**Fix:** Remind them of edge frequency physics: look for high error across the *entire interior area* of an item in GIMP. |
+| **Ch 4 (Med)** | Document ELA | `FLAG{3L4_R0GU3_CL34R4NC3_0V3RR1D3}` | **Pitfall:** Not seeing the glowing forged clearance block.<br>**Fix:** Advise performing GIMP layer difference with levels amplification (or demonstrating via `solutions/offline_ela_viewer.html`) and zooming into the lower-right box. |
 | **Ch 5 (Med)** | Stereo Spectrogram | `FLAG{DU4L_CH4NN3L_ST3R30_SP3CTRUM}` | **Pitfall:** Audio characters appear scrambled and unreadable in mono.<br>**Fix:** Remind them the audio is stereo; they must click track dropdown &rarr; `Split Stereo Track` to inspect Left and Right separately. |

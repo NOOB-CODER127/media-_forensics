@@ -145,15 +145,6 @@ def generate_challenge_4():
     composite.save(out_badge, format="JPEG", quality=95)
     print(f"  [+] Saved {out_badge}")
 
-    # Copy offline ELA viewer into challenge folder
-    src_viewer = os.path.join(BASE_DIR, "challenges", "challenge3_ela", "offline_ela_viewer.html")
-    dst_viewer = os.path.join(CH4_DIR, "offline_ela_viewer.html")
-    if os.path.exists(src_viewer):
-        with open(src_viewer, "r") as f_in, open(dst_viewer, "w") as f_out:
-            content = f_in.read().replace("crime_scene_evidence.jpg", "evidence_clearance_badge.jpg")
-            f_out.write(content)
-        print(f"  [+] Saved {dst_viewer}")
-
     # 5. Generate reference solution ELA image
     buf_ela = io.BytesIO()
     composite.save(buf_ela, format="JPEG", quality=90)

@@ -28,9 +28,13 @@ In `crime_scene_evidence.jpg`:
 
 ## Step-by-Step Solution
 
-### Step 1: Perform Error Level Analysis
-Open `offline_ela_viewer.html` or run `python3 solution/solve_ch3_ela.py`.
-Set Resave Quality to `90%` and Amplification to `30x`.
+### Step 1: Perform Error Level Analysis in GIMP
+1. Open `crime_scene_evidence.jpg` in GIMP (`File -> Open`).
+2. Export a reference resave at 90% quality: `File -> Export As... -> temp_resave.jpg` (Quality = 90).
+3. Load the resaved image as a new layer: `File -> Open as Layers... -> temp_resave.jpg`.
+4. In the Layers panel, switch the mode of `temp_resave.jpg` from **Normal** to **Difference**.
+5. Select `Layer -> New from Visible`, then open `Colors -> Levels` and slide the white point to the left to amplify differences ~30x.
+*(Alternatively, instructors can demonstrate using `solutions/offline_ela_viewer.html` or automated script `python3 solutions/challenge3_ela/solve_ch3_ela.py`)*.
 
 ### Step 2: Analyze the ELA Output
 Compare the areas of interest:
@@ -38,7 +42,7 @@ Compare the areas of interest:
 2. **The Victim:** The white t-shirt and tan trousers show consistent, uniform error levels across all fabric folds.
 3. **The Revolver & Evidence Tag:** Unlike the rest of the room, the **entire body of the revolver** (from the cylinder and barrel to the grip) and the **attached evidence tag** illuminate brightly with intense, multi-colored high error levels.
 
-See reference solution: [reference_crime_scene_ela.png](file:///home/prab/med-for-cha/challenges/challenge3_ela/solution/reference_crime_scene_ela.png).
+See reference solution: [reference_crime_scene_ela.png](file:///home/prab/med-for-cha/solutions/challenge3_ela/reference_crime_scene_ela.png).
 
 ### Step 3: Extract the Evidence Token
 Zoom in on the illuminated weapon at `X: 250-470, Y: 490-615`:

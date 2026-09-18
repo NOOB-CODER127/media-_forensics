@@ -73,14 +73,13 @@ When an image is modified and re-saved as a JPEG, newly inserted/modified elemen
 - **Natural High-Contrast Edges:** High contrast borders (like yellow evidence markers or black censor blocks) naturally show high-frequency edge response. Look inside the object surface.
 - **Areal Tampering:** Digitally staged objects (like a composite weapon) glow brightly across their entire body (cylinder, barrel, grip, tag) compared to the surrounding floor.
 
-### Useful Tools
-- **Bundled Offline Tool:** Double click `offline_ela_viewer.html` or open the Lab Portal in your browser (`ela_tool.html`).
-- **GIMP:**
-  1. Open image: `File -> Open -> crime_scene_evidence.jpg`
-  2. Export copy: `File -> Export As` with **Quality = 90%**
-  3. Load copy as top layer: `File -> Open as Layers`
-  4. Change Mode of top layer to **Difference**
-  5. Merge / New from visible, then increase brightness: `Colors -> Brightness-Contrast` or `Colors -> Levels`
+### Recommended Forensic Tool: GIMP (GNU Image Manipulation Program)
+Perform professional 5-step manual Error Level Analysis:
+1. **Open Image:** `File -> Open -> crime_scene_evidence.jpg`.
+2. **Export Reference at 90% Quality:** `File -> Export As... -> temp_resave.jpg`. In the JPEG export dialog, ensure Quality is set to **90%** and click **Export**.
+3. **Load Reference as Layer:** `File -> Open as Layers... -> temp_resave.jpg`.
+4. **Compute Difference:** In the **Layers** dockable dialog, change the top layer **Mode** from `Normal` to **Difference**.
+5. **Amplify Artifacts:** Select `Layer -> New from Visible`, then open `Colors -> Levels` (or `Colors -> Brightness-Contrast`). Drag the white input point to the left to amplify subtle compression differences.
 
 ---
 
@@ -89,11 +88,13 @@ When an image is modified and re-saved as a JPEG, newly inserted/modified elemen
 ### Background:
 Official credentials and ID badges should exhibit consistent compression history across all printed fields. When an unauthorized access level (e.g. Level 4) is digitally spliced onto a baseline badge, the spliced rectangle exhibits an enormous compression anomaly compared to the authentic photo and agency headers.
 
-### Detection Workflow:
-1. Open `offline_ela_viewer.html` and load `evidence_clearance_badge.jpg`.
-2. Set **Resave Quality: 90%** and **Amplification: 25x–30x**.
-3. Identify the rectangular glowing boundary over the clearance block.
-4. Read the unredacted digital crypto-override token inside the glowing box.
+### Detection Workflow in GIMP:
+1. **Open Image:** Load `evidence_clearance_badge.jpg` in GIMP (`File -> Open`).
+2. **Export Reference:** Export a reference copy as `temp_badge_resave.jpg` at **90% Quality**.
+3. **Open as Layer:** Go to `File -> Open as Layers...` and select `temp_badge_resave.jpg`.
+4. **Set Mode to Difference:** Change the layer blend mode to **Difference**.
+5. **Amplify Error Levels:** Go to `Layer -> New from Visible`, then open `Colors -> Levels` and slide the white slider left (or increase contrast/brightness ~25x).
+6. **Identify Splice:** Look for the brightly glowing rectangular boundary over the clearance block and read the digital clearance override token.
 
 ---
 

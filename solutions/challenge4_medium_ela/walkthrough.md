@@ -19,26 +19,26 @@ Error Level Analysis (ELA) identifies differences in JPEG compression error acro
 
 ## Step-by-Step Solution
 
-### Method 1: Using the Offline ELA Inspector
-1. Open `challenges/challenge4_medium_ela/offline_ela_viewer.html` in Chrome, Edge, or Firefox.
-2. The badge `evidence_clearance_badge.jpg` loads automatically.
-3. Slide **Resave Quality** to `90%` and **Error Amplification** to `30x`.
-4. Observe the document:
-   - The agency header, operative photo, barcode, and personal text remain dark and uniform.
-   - The entire lower-right rectangle `(X: 310 to 875, Y: 350 to 560)` glows intensely with vibrant high-frequency artifacts.
-5. Zoom in to read the glowing text inside the bounding box:
-   ```
-   FLAG{3L4_R0GU3_CL34R4NC3_0V3RR1D3}
-   ```
-
-### Method 2: Professional Forensic Analysis in GIMP
+### Method 1: Professional Forensic Analysis in GIMP (Participant Method)
 1. Open `evidence_clearance_badge.jpg` in GIMP.
 2. Choose `File -> Export As...` and save as `temp_resave.jpg` with **Quality: 90%**.
 3. Choose `File -> Open as Layers...` and select `temp_resave.jpg`.
 4. Change the upper layer mode to **Difference**.
 5. Select `Layer -> New from Visible`.
-6. Open `Colors -> Brightness-Contrast` and boost brightness to maximum (or adjust levels).
+6. Open `Colors -> Levels` (or `Colors -> Brightness-Contrast`) and slide the white point to the left to amplify differences ~30x.
 7. The fraudulent clearance patch illuminates sharply against the dark card baseline.
+8. Zoom in to read the glowing text inside the bounding box:
+   ```
+   FLAG{3L4_R0GU3_CL34R4NC3_0V3RR1D3}
+   ```
+
+### Method 2: Instructor Web ELA Inspector
+1. Open `solutions/offline_ela_viewer.html` or the portal's `ela_tool.html` in a web browser.
+2. Load `evidence_clearance_badge.jpg`.
+3. Slide **Resave Quality** to `90%` and **Error Amplification** to `30x`.
+4. Observe the document:
+   - The agency header, operative photo, barcode, and personal text remain dark and uniform.
+   - The entire lower-right rectangle `(X: 310 to 875, Y: 350 to 560)` glows intensely with vibrant high-frequency artifacts.
 
 ### Method 3: Headless Automated Verification
 Run the automated solver:
@@ -61,5 +61,5 @@ Output:
 
 ## Facilitator Hint Progression
 - **@ 15 mins:** "Look at the overall compression levels of the badge. Does the clearance level block have the same error signature as the agent photo and header?"
-- **@ 30 mins:** "Open `offline_ela_viewer.html` and set amplification to 30x. Look for a sharp rectangular boundary where the noise jumps dramatically."
+- **@ 30 mins:** "Perform ELA in GIMP (or examine the difference layer) and set levels amplification to ~30x. Look for a sharp rectangular boundary where the noise jumps dramatically."
 - **@ 40 mins:** "The forged block contains an override token formatted as `FLAG{3L4_...}`. Zoom directly into the glowing red stamp region."

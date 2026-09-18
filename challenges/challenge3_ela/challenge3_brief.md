@@ -23,8 +23,8 @@ As the Senior Forensic Image Analyst, you have been brought in to perform **Erro
 ---
 
 ## Mission Objectives
-1. Load `crime_scene_evidence.jpg` into your forensic image analysis tool (such as GIMP or the included `offline_ela_viewer.html`).
-2. Perform **Error Level Analysis (ELA)** across the crime scene.
+1. Load `crime_scene_evidence.jpg` into **GIMP (GNU Image Manipulation Program)**.
+2. Perform **Error Level Analysis (ELA)** across the crime scene by calculating the layer difference against a 90% re-saved reference copy.
 3. **Overcome Forensic Red Herrings:** Natural high-contrast edges (like the yellow marker cones A and B, or the black censor bar over the eyes) naturally generate high-frequency compression edges. Distinguish between normal edge frequency response and **true areal compression manipulation**.
 4. Identify the staged physical evidence item that exhibits an unnatural compression error rate across its entire surface.
 5. Inspect the staged item and retrieve the official forensic evidence token.
@@ -32,22 +32,40 @@ As the Senior Forensic Image Analyst, you have been brought in to perform **Erro
 
 ---
 
-## Recommended Investigative Methods
+## Step-by-Step Forensic Investigation in GIMP
 
-### Method 1: Standalone Offline ELA Inspector
-1. Open `offline_ela_viewer.html` in your web browser.
-2. Ensure `crime_scene_evidence.jpg` is loaded.
-3. Set **Resave Quality:** `90%` and **Error Amplification:** `30x`.
-4. Scan the floor, the body, the blood pools, the markers, and the weapon.
-5. Note which item glows with distinct, multi-colored high error levels across its entire body compared to the surrounding wooden floor and blood.
+### Step 1: Open Evidence File
+- Launch GIMP and open `crime_scene_evidence.jpg` (`File -> Open...`).
 
-### Method 2: Professional Forensic Analysis in GIMP
-1. Open `crime_scene_evidence.jpg`.
-2. Export a temporary copy: `File -> Export As... -> temp_ela.jpg` at **Quality: 90%**.
-3. Load the copy back as a layer: `File -> Open as Layers... -> temp_ela.jpg`.
-4. Change the top layer mode to **Difference**.
-5. Create a new layer from visible (`Layer -> New from Visible`), then boost brightness: `Colors -> Brightness-Contrast` or `Colors -> Levels`.
-6. Zoom into the glowing region.
+### Step 2: Generate Controlled Re-save Layer (Quality = 90%)
+- Export a temporary copy: `File -> Export As...`
+- Name the file `temp_resave.jpg` and click **Export**.
+- In the JPEG Options dialog:
+  - Set **Quality:** `90` (uncheck any extra smoothing).
+  - Click **Export**.
+
+### Step 3: Align Both Compression States as Layers
+- Load the newly created copy directly over the original:
+  `File -> Open as Layers... -> temp_resave.jpg`.
+- You now have two layers in the Layers panel on the right:
+  - Top layer: `temp_resave.jpg` (1-generation resaved)
+  - Bottom layer: `crime_scene_evidence.jpg` (original evidence)
+
+### Step 4: Subtract Layers (Difference Blending Mode)
+- Select the top layer (`temp_resave.jpg`).
+- In the Layers dropdown menu (where it says **Mode: Normal**), change the blending mode to **Difference**.
+- *Mathematical principle:* Identical compression pixels subtract to pure black (`0, 0, 0`), while freshly modified pixels produce subtle non-zero residual differences.
+
+### Step 5: Amplify Residual Error Matrix
+- Merge the visible difference into an editable layer:
+  `Layer -> New from Visible`.
+- Boost the microscopic differences into human visual range:
+  - Go to `Colors -> Levels...`.
+  - Drag the right-hand white slider significantly to the left (e.g. input levels `0` to `25` or `30`), or go to `Colors -> Brightness-Contrast` and boost brightness.
+- Zoom in and inspect the scene:
+  - The floor, victim, and blood pool remain dark.
+  - One specific staged physical item illuminates brightly with multi-colored artifact noise across its entire body!
+- Read the evidence token located on the staged item.
 
 ---
 

@@ -28,13 +28,11 @@ med-for-cha/
 │   │
 │   ├── challenge3_ela/                                 # [HARD] Crime Scene Image Forensics & ELA
 │   │   ├── crime_scene_evidence.jpg                    # Forensic crime scene photo with staged revolver
-│   │   ├── offline_ela_viewer.html                     # Standalone HTML5/Canvas ELA inspection tool
-│   │   └── challenge3_brief.md                         # Case 1 homicide investigation briefing
+│   │   └── challenge3_brief.md                         # Case 1 homicide investigation briefing (GIMP instructions)
 │   │
 │   ├── challenge4_medium_ela/                          # [MEDIUM] Document Forensics & ELA
 │   │   ├── evidence_clearance_badge.jpg                # Security access ID badge with forged clearance
-│   │   ├── offline_ela_viewer.html                     # Standalone HTML5/Canvas ELA inspection tool
-│   │   └── challenge4_brief.md                         # Case brief & instructions
+│   │   └── challenge4_brief.md                         # Case brief & instructions (GIMP instructions)
 │   │
 │   └── challenge5_medium_audio/                        # [MEDIUM] Stereo Audio Forensics & Spatial Spectrogram
 │       ├── covert_broadcast.wav                        # 18-second 44.1kHz Stereo audio recording
@@ -42,6 +40,7 @@ med-for-cha/
 │
 ├── solutions/                                          # Top-Level Organizer Solutions (Confidential)
 │   ├── README.md                                       # Facilitator answer keys & overview
+│   ├── offline_ela_viewer.html                         # Instructor HTML5/Canvas ELA inspection tool
 │   ├── challenge1_audio/                               # Audio solver & Audacity walkthrough
 │   │   ├── solve_ch1_audio.py                          # Automated STFT python solver
 │   │   ├── walkthrough.md                              # Facilitator guide

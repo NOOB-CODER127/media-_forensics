@@ -20,8 +20,8 @@ As the forensic image analyst, your task is to perform **Error Level Analysis (E
 ---
 
 ## Mission Objectives
-1. Load `evidence_clearance_badge.jpg` into your forensic image analysis tool (such as GIMP or the included `offline_ela_viewer.html`).
-2. Perform **Error Level Analysis (ELA)** across the badge.
+1. Load `evidence_clearance_badge.jpg` into **GIMP (GNU Image Manipulation Program)**.
+2. Perform **Error Level Analysis (ELA)** across the badge by calculating layer difference against a 90% re-saved reference copy.
 3. Compare the compression error rate of the personal details, photograph, and barcode against the clearance section.
 4. Confirm digital tampering and locate the forged authorization block.
 5. Recover the digital crypto-override token embedded inside the forged region.
@@ -29,23 +29,30 @@ As the forensic image analyst, your task is to perform **Error Level Analysis (E
 
 ---
 
-## Recommended Investigative Tools & Methods
+## Step-by-Step Forensic Investigation in GIMP
 
-### Method 1: Standalone Offline ELA Inspector
-1. Open `offline_ela_viewer.html` in any web browser.
-2. Ensure `evidence_clearance_badge.jpg` is loaded into the viewer.
-3. Adjust the controls:
-   - Set **Resave Quality:** `90%`
-   - Set **Error Amplification:** `25x` to `30x`
-4. Observe the difference in illumination across the document. Legitimate areas will settle into a dark, low-noise baseline, while the spliced clearance block will illuminate brightly.
+### Step 1: Open Badge Evidence
+- Launch GIMP and open `evidence_clearance_badge.jpg` (`File -> Open...`).
 
-### Method 2: Professional Forensic Analysis in GIMP
-1. Open `evidence_clearance_badge.jpg` in GIMP.
-2. Export a temporary copy: `File -> Export As... -> badge_resaved.jpg` with **Quality = 90%**.
-3. Load the resaved image as a new layer: `File -> Open as Layers... -> badge_resaved.jpg`.
-4. Set the blend mode of the top layer to **Difference**.
-5. Merge or create a new layer from visible (`Layer -> New from Visible`), then amplify brightness: `Colors -> Brightness-Contrast` or `Colors -> Levels`.
-6. Inspect the brightly glowing rectangular splice.
+### Step 2: Export Controlled Re-save Copy (Quality = 90%)
+- Choose `File -> Export As...`
+- Name the file `badge_resave.jpg` and click **Export**.
+- Set **Quality: 90** and click **Export**.
+
+### Step 3: Layer Alignment
+- Load the resaved image as the top layer:
+  `File -> Open as Layers... -> badge_resave.jpg`.
+
+### Step 4: Layer Subtraction (Difference Blending Mode)
+- In the Layers dock on the right, change the top layer Mode from `Normal` to **`Difference`**.
+
+### Step 5: Contrast & Level Amplification
+- Create a combined analysis layer: `Layer -> New from Visible`.
+- Boost brightness: Go to `Colors -> Levels...` and pull the white point slider down, or go to `Colors -> Brightness-Contrast` and increase Brightness.
+- Inspect the badge:
+  - The photo, barcode, agency banner, and background remain dark.
+  - The lower-right clearance section illuminates with sharp, multi-colored artifact noise!
+- Zoom into the glowing box to recover the unauthorized override token.
 
 ---
 

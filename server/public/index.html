@@ -399,11 +399,11 @@
         <div class="card-meta">
           <div><strong>Target File:</strong> crime_scene_evidence.jpg</div>
           <div><strong>Technique:</strong> Areal ELA Compression Differential</div>
-          <div><strong>Offline Tool:</strong> In-Browser ELA Inspector</div>
+          <div><strong>Forensic Tool:</strong> GIMP (GNU Image Manipulation Program)</div>
         </div>
         <div class="card-actions">
           <a href="downloads/challenge3_crime_scene_ela.zip" class="btn-secondary" download>Download ZIP</a>
-          <a href="ela_tool.html" class="btn-primary" target="_blank">Launch ELA Viewer</a>
+          <a href="#help-section" class="btn-primary" onclick="switchTab('ela')">GIMP ELA Guide</a>
         </div>
       </div>
 
@@ -416,11 +416,11 @@
         <div class="card-meta">
           <div><strong>Target File:</strong> evidence_clearance_badge.jpg</div>
           <div><strong>Technique:</strong> Document ELA Compression Differential</div>
-          <div><strong>Anomaly Ratio:</strong> &gt;16x error differential on spliced patch</div>
+          <div><strong>Forensic Tool:</strong> GIMP (GNU Image Manipulation Program)</div>
         </div>
         <div class="card-actions">
           <a href="downloads/challenge4_medium_ela.zip" class="btn-secondary" download>Download ZIP</a>
-          <a href="ela_tool.html" class="btn-primary" target="_blank">Launch ELA Viewer</a>
+          <a href="#help-section" class="btn-primary" onclick="switchTab('ela')">GIMP ELA Guide</a>
         </div>
       </div>
 
@@ -506,9 +506,18 @@ ffmpeg -ss 00:00:03.500 -i surveillance_traffic.mp4 -t 00:00:00.800 frames/apex_
       </div>
 
       <div id="tab-ela" class="tab-content">
-        <h3>Crime Scene ELA Interpretation</h3>
-        <p>1. <strong>Natural High-Frequency Edges:</strong> Sharp color transitions (such as yellow evidence markers A & B) naturally have higher edge response. Notice their interior surfaces are dark.<br>
-           2. <strong>Areal Compression Tampering:</strong> A digitally staged object will show high error across its <em>entire body</em> (cylinder, barrel, grip, and tag), proving it came from a different compression generation.
+        <h3>Manual Error Level Analysis (ELA) with GIMP</h3>
+        <p>Follow this 5-step forensic procedure in <strong>GIMP</strong> to detect compression differentials:</p>
+        <ol style="margin-left: 20px; line-height: 1.6;">
+          <li><strong>Open Target:</strong> <code>File &rarr; Open</code> (e.g., <code>crime_scene_evidence.jpg</code> or <code>evidence_clearance_badge.jpg</code>).</li>
+          <li><strong>Export Reference:</strong> <code>File &rarr; Export As... &rarr; temp_resave.jpg</code>. Set JPEG <strong>Quality to 90%</strong> and export.</li>
+          <li><strong>Load as Layer:</strong> <code>File &rarr; Open as Layers... &rarr; temp_resave.jpg</code>.</li>
+          <li><strong>Set Difference Mode:</strong> In the Layers panel, switch the top layer Mode from <em>Normal</em> to <strong>Difference</strong>.</li>
+          <li><strong>Amplify &amp; Inspect:</strong> Go to <code>Layer &rarr; New from Visible</code>, then open <code>Colors &rarr; Levels</code> (or <code>Brightness-Contrast</code>). Drag the white input slider left to amplify the subtle compression error.</li>
+        </ol>
+        <h4>Forensic Interpretation:</h4>
+        <p>1. <strong>Natural High-Frequency Edges:</strong> Sharp color transitions (such as yellow evidence markers A & B) naturally show high-frequency edge response. Notice their interior surfaces are dark.<br>
+           2. <strong>Areal Compression Tampering:</strong> A digitally staged object or spliced credential block will show high error across its <em>entire body</em> (cylinder, barrel, grip, tag or badge patch), proving it originated from a different compression generation.
         </p>
       </div>
 
