@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Offline Crime Scene ELA Inspector | Case 1 Investigation</title>
+  <style>
+    :root {
+      --bg-dark: #0f141c;
+      --panel-bg: #18202c;
+      --accent-cyan: #00e5ff;
+      --accent-red: #ff3366;
+      --accent-green: #00e676;
+      --text-main: #e0e6ed;
+      --text-dim: #8b9bb4;
+      --border-color: #273447;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      padding: 24px;
+      line-height: 1.5;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+    }
+    h1 { font-size: 22px; color: var(--accent-red); letter-spacing: 0.5px; }
+    .badge {
+      background: rgba(255, 51, 102, 0.15);
+      color: var(--accent-red);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+      border: 1px solid var(--accent-red);
+    }
+    .container {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 24px;
+    }
+    .panel {
+      background: var(--panel-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .panel h2 {
+      font-size: 16px;
+      margin-bottom: 16px;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .control-group {
+      margin-bottom: 18px;
+    }
+    label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: var(--text-dim);
+    }
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--accent-cyan);
+    }
+    .btn {
+      width: 100%;
+      padding: 10px 16px;
+      background: var(--accent-red);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .drop-zone {
+      border: 2px dashed var(--border-color);
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: border-color 0.2s;
+      margin-bottom: 16px;
+    }
+    .drop-zone:hover { border-color: var(--accent-cyan); color: var(--text-main); }
+    .viewer {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .canvas-container {
+      background: #000;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .canvas-container h3 {
+      font-size: 13px;
+      margin-bottom: 8px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+    canvas {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+    .info-box {
+      margin-top: 20px;
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.6;
+      border-top: 1px solid var(--border-color);
+      padding-top: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>
+      <h1>CASE 1 // HOMICIDE SCENE ERROR LEVEL ANALYSIS</h1>
+      <p style="font-size: 13px; color: var(--text-dim);">Digital Forensics Division — Physical Evidence Authentication</p>
+    </div>
+    <span class="badge">CASE #CRIME-2026-CASE1</span>
+  </header>
+
+  <div class="container">
+    <div class="panel">
+      <h2>Forensic Controls</h2>
+
+      <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+        <strong>Click or Drag & Drop</strong>
+        <p style="font-size: 12px; margin-top: 4px;">evidence_clearance_badge.jpg</p>
+        <input type="file" id="fileInput" accept="image/*" style="display: none">
+      </div>
+
+      <div class="control-group">
+        <label>Resave Quality: <span id="qualityVal">90%</span></label>
+        <input type="range" id="qualitySlider" min="60" max="98" value="90" step="1">
+      </div>
+
+      <div class="control-group">
+        <label>Error Amplification: <span id="scaleVal">30x</span></label>
+        <input type="range" id="scaleSlider" min="5" max="60" value="30" step="1">
+      </div>
+
+      <button class="btn" id="loadEvidenceBtn">Reload Crime Scene File</button>
+
+      <div class="info-box">
+        <strong>Forensic Analyst Note:</strong><br>
+        1. Beware of sharp color boundaries (like yellow cone markers A and B); natural edges always have high-frequency transitions.<br>
+        2. Look for <em>areal compression discrepancies</em> across entire objects. If an evidence item was composited from another source, its entire body will exhibit distinct quantization noise.
+      </div>
+    </div>
+
+    <div class="viewer">
+      <div class="canvas-container">
+        <h3>Crime Scene Photograph</h3>
+        <canvas id="origCanvas"></canvas>
+      </div>
+      <div class="canvas-container">
+        <h3>Error Level Analysis (ELA)</h3>
+        <canvas id="elaCanvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById('fileInput');
+    const dropZone = document.getElementById('dropZone');
+    const qualitySlider = document.getElementById('qualitySlider');
+    const scaleSlider = document.getElementById('scaleSlider');
+    const qualityVal = document.getElementById('qualityVal');
+    const scaleVal = document.getElementById('scaleVal');
+    const loadEvidenceBtn = document.getElementById('loadEvidenceBtn');
+
+    const origCanvas = document.getElementById('origCanvas');
+    const elaCanvas = document.getElementById('elaCanvas');
+    const origCtx = origCanvas.getContext('2d');
+    const elaCtx = elaCanvas.getContext('2d');
+
+    let currentImg = null;
+
+    function processImage(img) {
+      currentImg = img;
+      origCanvas.width = img.width;
+      origCanvas.height = img.height;
+      elaCanvas.width = img.width;
+      elaCanvas.height = img.height;
+
+      origCtx.drawImage(img, 0, 0);
+      computeELA();
+    }
+
+    function computeELA() {
+      if (!currentImg) return;
+      const q = parseFloat(qualitySlider.value) / 100.0;
+      const scale = parseFloat(scaleSlider.value);
+
+      const jpegDataUrl = origCanvas.toDataURL('image/jpeg', q);
+      const resaved = new Image();
+      resaved.onload = () => {
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = origCanvas.width;
+        tempCanvas.height = origCanvas.height;
+        const tempCtx = tempCanvas.getContext('2d');
+        tempCtx.drawImage(resaved, 0, 0);
+
+        const origData = origCtx.getImageData(0, 0, origCanvas.width, origCanvas.height);
+        const resavedData = tempCtx.getImageData(0, 0, origCanvas.width, origCanvas.height);
+        const elaData = elaCtx.createImageData(origCanvas.width, origCanvas.height);
+
+        const d1 = origData.data;
+        const d2 = resavedData.data;
+        const out = elaData.data;
+
+        for (let i = 0; i < d1.length; i += 4) {
+          out[i]     = Math.min(255, Math.abs(d1[i] - d2[i]) * scale);
+          out[i + 1] = Math.min(255, Math.abs(d1[i + 1] - d2[i + 1]) * scale);
+          out[i + 2] = Math.min(255, Math.abs(d1[i + 2] - d2[i + 2]) * scale);
+          out[i + 3] = 255;
+        }
+        elaCtx.putImageData(elaData, 0, 0);
+      };
+      resaved.src = jpegDataUrl;
+    }
+
+    qualitySlider.addEventListener('input', (e) => {
+      qualityVal.textContent = e.target.value + '%';
+      computeELA();
+    });
+
+    scaleSlider.addEventListener('input', (e) => {
+      scaleVal.textContent = e.target.value + 'x';
+      computeELA();
+    });
+
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const img = new Image();
+          img.onload = () => processImage(img);
+          img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.style.borderColor = '#00e5ff'; });
+    dropZone.addEventListener('dragleave', () => { dropZone.style.borderColor = '#273447'; });
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#273447';
+      if (e.dataTransfer.files.length) {
+        fileInput.files = e.dataTransfer.files;
+        fileInput.dispatchEvent(new Event('change'));
+      }
+    });
+
+    loadEvidenceBtn.addEventListener('click', () => {
+      const img = new Image();
+      img.onload = () => processImage(img);
+      img.src = 'evidence_clearance_badge.jpg';
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadEvidenceBtn.click();
+    });
+  </script>
+</body>
+</html>

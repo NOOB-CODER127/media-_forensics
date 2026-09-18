@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media Forensics & Deepfake Lab | Investigation Portal</title>
+  <style>
+    :root {
+      --bg-dark: #0a0e17;
+      --card-bg: #131b26;
+      --card-hover: #192332;
+      --accent-cyan: #00f0ff;
+      --accent-green: #00ff88;
+      --accent-amber: #ffb703;
+      --accent-red: #ff3366;
+      --text-main: #f0f4f8;
+      --text-muted: #8c9ba5;
+      --border: #202d3f;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      line-height: 1.6;
+      padding: 0;
+      margin: 0;
+    }
+    header {
+      background: linear-gradient(180deg, #101726 0%, #0a0e17 100%);
+      border-bottom: 2px solid var(--border);
+      padding: 30px 24px 24px 24px;
+      text-align: center;
+      position: relative;
+    }
+    .status-badge {
+      display: inline-block;
+      background: rgba(0, 240, 255, 0.1);
+      color: var(--accent-cyan);
+      border: 1px solid var(--accent-cyan);
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      padding: 4px 14px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+    h1 {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+    h1 span { color: var(--accent-cyan); }
+    .theme-quote {
+      font-size: 16px;
+      color: var(--accent-green);
+      font-style: italic;
+      margin-bottom: 8px;
+    }
+    .hero-meta {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 20px 60px 20px;
+    }
+    .all-download-box {
+      background: linear-gradient(90deg, rgba(0, 240, 255, 0.08) 0%, rgba(0, 255, 136, 0.08) 100%);
+      border: 1px solid var(--accent-cyan);
+      border-radius: 10px;
+      padding: 20px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .all-download-info h3 {
+      color: #fff;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+    .all-download-info p {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .btn-mega {
+      background: var(--accent-cyan);
+      color: #050a12;
+      font-weight: 800;
+      padding: 12px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-mega:hover {
+      background: #4df3ff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 240, 255, 0.35);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .card:hover {
+      background: var(--card-hover);
+      border-color: #384d69;
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+    .diff-pill {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: inline-block;
+      margin-bottom: 12px;
+      align-self: flex-start;
+    }
+    .easy { background: rgba(0, 255, 136, 0.15); color: var(--accent-green); border: 1px solid var(--accent-green); }
+    .medium { background: rgba(255, 183, 3, 0.15); color: var(--accent-amber); border: 1px solid var(--accent-amber); }
+    .hard { background: rgba(255, 51, 102, 0.15); color: var(--accent-red); border: 1px solid var(--accent-red); }
+
+    .card h2 {
+      font-size: 20px;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .card .category {
+      font-size: 13px;
+      color: var(--accent-cyan);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+    .card-meta {
+      background: #0d131d;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 12px;
+      margin-bottom: 18px;
+      color: #a0aec0;
+    }
+    .card-meta div {
+      margin-bottom: 4px;
+    }
+    .card-meta strong {
+      color: #e2e8f0;
+    }
+    .card-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .btn-secondary {
+      flex: 1;
+      background: #1c2635;
+      color: var(--text-main);
+      text-align: center;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .btn-secondary:hover {
+      background: #253347;
+      color: #fff;
+    }
+    .btn-primary {
+      flex: 1;
+      background: #00e5ff;
+      color: #000;
+      text-align: center;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+
+    /* Flag Validator Panel */
+    .validator-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 30px;
+      margin-bottom: 40px;
+    }
+    .validator-section h2 {
+      font-size: 20px;
+      color: var(--accent-green);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .validator-section p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .validator-form {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    select, input[type="text"] {
+      background: #0d131d;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 12px 16px;
+      color: #fff;
+      font-size: 14px;
+    }
+    select { min-width: 220px; }
+    input[type="text"] { flex-grow: 1; min-width: 280px; }
+    input[type="text"]:focus, select:focus {
+      outline: none;
+      border-color: var(--accent-cyan);
+    }
+    .btn-validate {
+      background: var(--accent-green);
+      color: #050a12;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 24px;
+      font-weight: 800;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .btn-validate:hover {
+      background: #39ff9f;
+      box-shadow: 0 4px 14px rgba(0, 255, 136, 0.3);
+    }
+    #resultAlert {
+      margin-top: 16px;
+      padding: 14px 18px;
+      border-radius: 6px;
+      font-size: 14px;
+      display: none;
+      font-weight: 600;
+    }
+    .alert-success {
+      background: rgba(0, 255, 136, 0.15);
+      border: 1px solid var(--accent-green);
+      color: var(--accent-green);
+    }
+    .alert-error {
+      background: rgba(255, 51, 102, 0.15);
+      border: 1px solid var(--accent-red);
+      color: var(--accent-red);
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 16px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .tab-btn.active {
+      background: #1c2635;
+      color: var(--accent-cyan);
+    }
+    .tab-content {
+      display: none;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      font-size: 14px;
+    }
+    .tab-content.active { display: block; }
+    .tab-content h3 { color: #fff; margin-bottom: 12px; font-size: 16px; }
+    .tab-content pre {
+      background: #0a0e17;
+      padding: 12px 16px;
+      border-radius: 6px;
+      border: 1px solid #1a2536;
+      color: var(--accent-cyan);
+      overflow-x: auto;
+      margin: 10px 0;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="status-badge">● Live Investigation Environment</div>
+    <h1>MEDIA FORENSICS &amp; DEEPFAKE <span>LAB</span></h1>
+    <div class="theme-quote">"You are the digital forensic analyst – uncover the truth hidden in pixels, frames, and sound."</div>
+    <div class="hero-meta">Progressive 3-Hour Investigation Suite | Standalone Offline Ready</div>
+  </header>
+
+  <div class="container">
+
+    <!-- All in One Download Banner -->
+    <div class="all-download-box">
+      <div class="all-download-info">
+        <h3>Download Full Investigation Suite (All 3 Challenges)</h3>
+        <p>Includes intercepted audio wiretap, surveillance video, crime scene photograph, and offline inspection tools.</p>
+      </div>
+      <a href="downloads/all_challenges_bundle.zip" class="btn-mega" download>
+        ⬇ Download Complete Suite (.ZIP)
+      </a>
+    </div>
+
+    <!-- 3 Progressive Challenge Cards -->
+    <div class="grid">
+      <!-- Challenge 1 -->
+      <div class="card">
+        <span class="diff-pill easy">Challenge 1 • Easy (30 min)</span>
+        <h2>Operation Whispering Wiretap</h2>
+        <div class="category">Audio Forensics &amp; Spectrogram Steganography</div>
+        <p>Signals intelligence intercepted a crackling radio transmission. To the ear it sounds like static and hum, but a covert passphrase is drawn in high-frequency spectral lines. Open Audacity in Spectrogram view to read it.</p>
+        <div class="card-meta">
+          <div><strong>Target File:</strong> intercepted_wiretap.wav</div>
+          <div><strong>Technique:</strong> Spectrogram View (Linear Scale)</div>
+          <div><strong>Frequency Band:</strong> 9,000 Hz – 14,500 Hz</div>
+        </div>
+        <div class="card-actions">
+          <a href="downloads/challenge1_audio.zip" class="btn-secondary" download>Download ZIP</a>
+          <a href="#help-section" class="btn-primary" onclick="switchTab('audacity')">Audacity Guide</a>
+        </div>
+      </div>
+
+      <!-- Challenge 2 -->
+      <div class="card">
+        <span class="diff-pill medium">Challenge 2 • Medium (50 min)</span>
+        <h2>Operation Ghost Vehicle</h2>
+        <div class="category">Video Forensics &amp; License Plate De-Blur</div>
+        <p>A dark Toyota Camry sedan sped past camera CAM-04 on wet asphalt. Locate the deceleration "golden frame", crop the motion-blurred front bumper plate, and apply unsharp masking to decipher the license characters.</p>
+        <div class="card-meta">
+          <div><strong>Target File:</strong> surveillance_traffic.mp4 (or frames/)</div>
+          <div><strong>Technique:</strong> Frame extraction &amp; Unsharp masking</div>
+          <div><strong>Golden Window:</strong> Frames #80 – #95 (Frame #90)</div>
+        </div>
+        <div class="card-actions">
+          <a href="downloads/challenge2_video.zip" class="btn-secondary" download>Download ZIP</a>
+          <a href="downloads/challenge2_video.zip" class="btn-primary" download>Get Frames</a>
+        </div>
+      </div>
+
+      <!-- Challenge 3 -->
+      <div class="card">
+        <span class="diff-pill hard">Challenge 3 • Hard (50 min)</span>
+        <h2>Case 1: The Staged Crime Scene</h2>
+        <div class="category">Crime Scene Image Forensics &amp; Error Level Analysis (ELA)</div>
+        <p>An autopsy concluded the victim did not die from a gunshot wound and had no GSR. Perform Error Level Analysis on the complex crime scene photograph, overcome high-contrast edge distractors, and expose the staged weapon!</p>
+        <div class="card-meta">
+          <div><strong>Target File:</strong> crime_scene_evidence.jpg</div>
+          <div><strong>Technique:</strong> Areal ELA Compression Differential</div>
+          <div><strong>Offline Tool:</strong> In-Browser ELA Inspector</div>
+        </div>
+        <div class="card-actions">
+          <a href="downloads/challenge3_crime_scene_ela.zip" class="btn-secondary" download>Download ZIP</a>
+          <a href="ela_tool.html" class="btn-primary" target="_blank">Launch ELA Viewer</a>
+        </div>
+      </div>
+
+      <!-- Challenge 4 -->
+      <div class="card">
+        <span class="diff-pill medium">Challenge 4 • Medium (50 min)</span>
+        <h2>Operation Rogue Credential</h2>
+        <div class="category">Document Forensics &amp; Error Level Analysis (ELA)</div>
+        <p>A contractor used a laminated badge to breach a Level-4 vault. Visually it appears approved, but database records say Level 1. Perform ELA to expose the digital clearance splice and retrieve the unauthorized override code.</p>
+        <div class="card-meta">
+          <div><strong>Target File:</strong> evidence_clearance_badge.jpg</div>
+          <div><strong>Technique:</strong> Document ELA Compression Differential</div>
+          <div><strong>Anomaly Ratio:</strong> &gt;16x error differential on spliced patch</div>
+        </div>
+        <div class="card-actions">
+          <a href="downloads/challenge4_medium_ela.zip" class="btn-secondary" download>Download ZIP</a>
+          <a href="ela_tool.html" class="btn-primary" target="_blank">Launch ELA Viewer</a>
+        </div>
+      </div>
+
+      <!-- Challenge 5 -->
+      <div class="card">
+        <span class="diff-pill medium">Challenge 5 • Medium (50 min)</span>
+        <h2>Operation Blackout Broadcast</h2>
+        <div class="category">Stereo Audio Forensics &amp; Spatial Spectrogram</div>
+        <p>A clandestine pirate broadcast transmitted a two-part secret passkey. In mono the audio is scrambled, but the channels carry independent spectral streams. Split the stereo track in Audacity to recover both passkey halves.</p>
+        <div class="card-meta">
+          <div><strong>Target File:</strong> covert_broadcast.wav (Stereo 44.1kHz)</div>
+          <div><strong>Technique:</strong> Split Stereo Track &amp; Linear Spectrogram</div>
+          <div><strong>Frequency Band:</strong> 6,000 Hz – 12,000 Hz (Left &amp; Right)</div>
+        </div>
+        <div class="card-actions">
+          <a href="downloads/challenge5_medium_audio.zip" class="btn-secondary" download>Download ZIP</a>
+          <a href="#help-section" class="btn-primary" onclick="switchTab('stereo')">Stereo Guide</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Flag Verification Widget -->
+    <div class="validator-section">
+      <h2>🛡️ Flag Verification Terminal</h2>
+      <p>Submit your recovered forensic tokens below for instant real-time verification and prize token eligibility.</p>
+      
+      <div class="validator-form">
+        <select id="challengeSelect">
+          <option value="ch1">Challenge 1: Operation Whispering Wiretap (Audio)</option>
+          <option value="ch2">Challenge 2: Operation Ghost Vehicle (Video)</option>
+          <option value="ch3">Challenge 3: Case 1 - The Staged Crime Scene (ELA)</option>
+          <option value="ch4">Challenge 4: Operation Rogue Credential (ELA)</option>
+          <option value="ch5">Challenge 5: Operation Blackout Broadcast (Stereo Audio)</option>
+        </select>
+        <input type="text" id="flagInput" placeholder="Enter recovered flag, e.g., FLAG{...}" autocomplete="off">
+        <button class="btn-validate" onclick="verifyFlag()">Validate Flag</button>
+      </div>
+
+      <div id="resultAlert"></div>
+    </div>
+
+    <!-- Quick Reference & Help Section -->
+    <div id="help-section">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('schedule')">Batch Timeline</button>
+        <button class="tab-btn" onclick="switchTab('audacity')">Audacity Spectrogram</button>
+        <button class="tab-btn" onclick="switchTab('ffmpeg')">FFmpeg Commands</button>
+        <button class="tab-btn" onclick="switchTab('ela')">Crime Scene ELA Tips</button>
+        <button class="tab-btn" onclick="switchTab('stereo')">Stereo Audio Guide</button>
+      </div>
+
+      <div id="tab-schedule" class="tab-content active">
+        <h3>3-Hour Session Flow</h3>
+        <p><strong>0:00–0:15:</strong> Setup, Wi-Fi connection, suite download.<br>
+           <strong>0:15–0:25:</strong> <strong>Live Demo 1:</strong> Audio Spectrogram Steganography principles.<br>
+           <strong>0:25–0:55:</strong> <strong>Challenge 1 (Easy):</strong> Solve Operation Whispering Wiretap (30m).<br>
+           <strong>0:55–1:05:</strong> Reveal Ch 1, <strong>Live Demo 2:</strong> Frame extraction &amp; Plate de-blurring.<br>
+           <strong>1:05–1:55:</strong> <strong>Challenge 2 (Medium):</strong> Solve Operation Ghost Vehicle (50m).<br>
+           <strong>1:55–2:05:</strong> Reveal Ch 2, <strong>Live Demo 3:</strong> Advanced ELA on real-world crime scenes.<br>
+           <strong>2:05–2:55:</strong> <strong>Challenge 3 (Hard):</strong> Solve Case 1: The Staged Crime Scene (50m).<br>
+           <strong>2:55–3:00:</strong> Final awards, prize token distribution, and conclusion.
+        </p>
+      </div>
+
+      <div id="tab-audacity" class="tab-content">
+        <h3>Audacity Spectrogram Configuration</h3>
+        <p>1. Import <code>intercepted_wiretap.wav</code>.<br>
+           2. Click the track dropdown chevron <code>▼</code> on the left panel &rarr; select <strong>Spectrogram</strong>.<br>
+           3. Click the dropdown <code>▼</code> again &rarr; <strong>Spectrogram Settings...</strong>.<br>
+           4. Change <strong>Scale</strong> from <code>Logarithmic</code> to <strong>Linear</strong>.<br>
+           5. Set <strong>Max Frequency</strong> to <code>16000 Hz</code> and <strong>Min Frequency</strong> to <code>7000 Hz</code>.<br>
+           6. Zoom in between <strong>2.5s and 14.5s</strong> to read the text.
+        </p>
+      </div>
+
+      <div id="tab-ffmpeg" class="tab-content">
+        <h3>FFmpeg Frame Extraction Quick Reference</h3>
+        <pre># Extract all frames as PNGs
+ffmpeg -i surveillance_traffic.mp4 -vsync 0 frames/frame_%03d.png
+
+# Extract only frames between 3.5s and 4.0s (Golden Apex window)
+ffmpeg -ss 00:00:03.500 -i surveillance_traffic.mp4 -t 00:00:00.800 frames/apex_%02d.png</pre>
+      </div>
+
+      <div id="tab-ela" class="tab-content">
+        <h3>Crime Scene ELA Interpretation</h3>
+        <p>1. <strong>Natural High-Frequency Edges:</strong> Sharp color transitions (such as yellow evidence markers A & B) naturally have higher edge response. Notice their interior surfaces are dark.<br>
+           2. <strong>Areal Compression Tampering:</strong> A digitally staged object will show high error across its <em>entire body</em> (cylinder, barrel, grip, and tag), proving it came from a different compression generation.
+        </p>
+      </div>
+
+      <div id="tab-stereo" class="tab-content">
+        <h3>Audacity Stereo Channel Decoupling</h3>
+        <p>1. Open <code>covert_broadcast.wav</code> in Audacity.<br>
+           2. Click the track title dropdown chevron <code>▼</code> &rarr; select <strong>Split Stereo Track</strong>.<br>
+           3. Notice that Track 1 (Left Channel) and Track 2 (Right Channel) can now be inspected individually.<br>
+           4. Set both tracks to <strong>Spectrogram View</strong> (Linear scale, 5,000 Hz – 14,000 Hz).<br>
+           5. Read the first half of the flag in the Left track, and the second half in the Right track!
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const FLAG_HASHES = {
+      ch1: ["3d220d95a5028c7721f5a39503f4e42e9ff80f8b6df75cccf47bdc3175e8a0c0"], // FLAG{SP3CTR4L_AUD10_CYPH3R}
+      ch2: [
+        "c1c27ce0a3f7fb073d35d5156c71b719906e6de33659de13c9ff90169cea9131", // FLAG{PL4T3_VB698108_CLR}
+        "3786ce781ed9a4754d25778986a14c034ad61b226c9baf1f7f65d64a583cf129", // VB 698 108
+        "03c327e715f7b84e842fa52ba449c2d9654dfbe41538bdd2fbca5e6d83819a0b", // VB698108
+        "78d1d91a1b254630cd682acaadea41fce7b4f7ca3c89ce1e98090e271a2df777", // V8 698 108
+        "be726094d3a6c83c8348491c47f2894774e7c0836e9a3e16cc1492018e479bfd", // V8698108
+        "00617a6189946d3ef21f6ab9d8a2a5808fe0998c019e44dc07a4016b7fb5bb5d", // FLAG{VB698108}
+        "739b0a5fea5ec73d1afed882fc2146c650b75b4a307f5d26e64038e624fb3475"  // FLAG{PL4T3_VB698108}
+      ],
+      ch3: ["f72bb88f4e4ff111fec457989cf0068b6370a4506e65c38d25c918bb5d0e0e36"], // FLAG{3L4_ST4G3D_W34P0N_R3V0LV3R}
+      ch4: ["2e51367080531618178d3b7c9dceba86e3b1a7db7d988e4d7e037bb89dbb194d"], // FLAG{3L4_R0GU3_CL34R4NC3_0V3RR1D3}
+      ch5: ["e87d6be5e3fc3dd03c1249273660a81069efd630b3c8944f92ec607b4549172a"]  // FLAG{DU4L_CH4NN3L_ST3R30_SP3CTRUM}
+    };
+
+    async function sha256(message) {
+      const msgBuffer = new TextEncoder().encode(message.trim());
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    async function verifyFlag() {
+      const ch = document.getElementById('challengeSelect').value;
+      const input = document.getElementById('flagInput').value.trim();
+      const alertBox = document.getElementById('resultAlert');
+
+      if (!input) {
+        alertBox.className = 'alert-error';
+        alertBox.textContent = 'Please enter a flag string before submitting.';
+        alertBox.style.display = 'block';
+        return;
+      }
+
+      const inputHash = await sha256(input);
+      if (FLAG_HASHES[ch] && FLAG_HASHES[ch].includes(inputHash)) {
+        alertBox.className = 'alert-success';
+        alertBox.innerHTML = '🎉 <strong>CORRECT!</strong> Flag verified successfully. Please notify your Zone Lead to receive your Challenge Prize Token!';
+        alertBox.style.display = 'block';
+      } else {
+        alertBox.className = 'alert-error';
+        alertBox.innerHTML = '❌ <strong>INCORRECT FLAG.</strong> Double check your extraction or consult the timed hints!';
+        alertBox.style.display = 'block';
+      }
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      
+      const content = document.getElementById('tab-' + tabId);
+      if (content) {
+        content.classList.add('active');
+        event.target.classList.add('active');
+      }
+    }
+  </script>
+</body>
+</html>

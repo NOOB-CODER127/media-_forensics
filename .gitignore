@@ -1,0 +1,17 @@
+# Pre-packaged server archives (generated dynamically on server startup)
+server/public/downloads/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# OS and Editor artifacts
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
