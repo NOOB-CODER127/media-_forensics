@@ -65,17 +65,21 @@ Inspect the amplified difference canvas:
 2. **Victim's Body & Bedding:** Exhibit uniform, low-level error across fabric folds.
 3. **The Staged Revolver:** Near the victim's left hand on the blood pool (`X: 250–470, Y: 490–615`), an entire object glows intensely with multi-colored, high-amplitude error across its cylinder, barrel, grip, and attached rectangular tag! This confirms it was digitally inserted.
 
-#### Step 7: Read the Evidence Tag Token
-1. Zoom in closely on the glowing white tag attached directly beneath the revolver's cylinder.
-2. Read the embossed evidence verification string:
+#### Step 7: Identify the Staged Item & Retrieve Flag
+1. Zoom in closely on the glowing object at `X: 250–470, Y: 490–615`.
+2. The tag attached to the weapon confirms its identification:
 ```
 FORENSIC EVIDENCE TAG #01-W
+ITEM: REVOLVER (.38 SPECIAL)
+```
+3. Because ELA proves that the revolver is the staged evidence item (while cones A and B are authentic), format the verified finding flag:
+```
 FLAG{3L4_ST4G3D_W34P0N_R3V0LV3R}
 ```
 
 #### Step 8: Flag Verification
-Submit the extracted token:
+Submit the verified finding in the Lab Portal:
 ```
 FLAG{3L4_ST4G3D_W34P0N_R3V0LV3R}
 ```
-Verify the flag in the Lab Portal to solve the case!
+*(The portal also accepts `REVOLVER` or `FLAG{R3V0LV3R}`)*. Verify the flag to solve Case 1!

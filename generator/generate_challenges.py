@@ -335,7 +335,7 @@ def generate_challenge_3():
     cdraw.rectangle([(0, 0), (card_w - 1, card_h - 1)], outline=(40, 40, 40), width=1)
     font_mono = get_font(FONT_MONO, 8)
     cdraw.text((6, 3), "FORENSIC EVIDENCE TAG #01-W", font=font_mono, fill=(190, 25, 25))
-    cdraw.text((6, 14), "FLAG{3L4_ST4G3D_W34P0N_R3V0LV3R}", font=font_mono, fill=(15, 15, 15))
+    cdraw.text((6, 14), "ITEM: REVOLVER (.38 SPECIAL)", font=font_mono, fill=(35, 35, 35))
 
     gun_crop.paste(card, (5, 90))
 

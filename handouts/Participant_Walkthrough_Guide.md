@@ -80,11 +80,16 @@
 6. **Forensic Analysis:**
    - Notice yellow markers A & B only have thin edge outlines, while their interior bodies are dark (natural high-frequency edges).
    - Near the victim's hand (`X: 250–470, Y: 490–615`), the **entire body of the revolver and its attached evidence tag** glow brightly with intense multi-colored noise, proving it was digitally inserted.
-7. **Read Evidence Tag:** Zoom into the glowing white tag attached below the cylinder:
+7. **Identify Staged Weapon & Flag:** Zoom into the glowing tag attached below the cylinder:
    ```
    FORENSIC EVIDENCE TAG #01-W
+   ITEM: REVOLVER (.38 SPECIAL)
+   ```
+   Because ELA confirms the revolver was staged into the scene, format the flag as:
+   ```
    FLAG{3L4_ST4G3D_W34P0N_R3V0LV3R}
    ```
+   *(Portal also accepts `REVOLVER` or `FLAG{R3V0LV3R}`)*.
 
 ---
 
@@ -104,10 +109,15 @@
 6. **Locate the Forgery:**
    - The photo, barcode, and header text stay dark and uniform.
    - The entire lower-right authorization block (`X: 310 to 875, Y: 350 to 560`) illuminates intensely with a **16x error differential**, revealing the spliced rectangular crop boundary.
-7. **Read Override Token:** Zoom into the glowing authorization box:
+7. **Read Override Code & Flag:** Zoom into the glowing authorization box:
+   ```
+   AUTH OVERRIDE: CL34R4NC3_0V3RR1D3 // SEC-4
+   ```
+   Submit the official override flag:
    ```
    FLAG{3L4_R0GU3_CL34R4NC3_0V3RR1D3}
    ```
+   *(Portal also accepts `CL34R4NC3_0V3RR1D3` or `0V3RR1D3`)*.
 
 ---
 

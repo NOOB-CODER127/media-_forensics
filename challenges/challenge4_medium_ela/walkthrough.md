@@ -59,16 +59,20 @@ Examine the amplified difference output across the badge:
 2. The entire lower-right authorization block (`X: 310 to 875, Y: 350 to 560`) illuminates with extreme brightness and intense multi-colored noise (error rate ~2.55, a **16x anomaly**).
 3. The crisp rectangular border clearly delineates where the digital crop was spliced over the original Level 1 field.
 
-#### Step 7: Read the Override Token
-1. Zoom in on the glowing red/white authorization box in the lower-right quadrant.
-2. Read the digital clearance override string:
+#### Step 7: Read the Override Token & Flag
+1. Zoom in on the glowing clearance authorization block (`X: 310 to 875, Y: 350 to 560`).
+2. Read the spliced authorization override code inside the glowing box:
+```
+AUTH OVERRIDE: CL34R4NC3_0V3RR1D3 // SEC-4
+```
+3. Format the official flag:
 ```
 FLAG{3L4_R0GU3_CL34R4NC3_0V3RR1D3}
 ```
 
 #### Step 8: Flag Verification
-Submit the extracted token:
+Submit the verified token in the Lab Portal:
 ```
 FLAG{3L4_R0GU3_CL34R4NC3_0V3RR1D3}
 ```
-Validate the token in the Lab Portal to confirm the clearance fraud!
+*(The portal also accepts `CL34R4NC3_0V3RR1D3` or `0V3RR1D3`)*. Validation confirms the clearance fraud!

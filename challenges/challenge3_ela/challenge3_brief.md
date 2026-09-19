@@ -65,12 +65,13 @@ As the Senior Forensic Image Analyst, you have been brought in to perform **Erro
 - Zoom in and inspect the scene:
   - The floor, victim, and blood pool remain dark.
   - One specific staged physical item illuminates brightly with multi-colored artifact noise across its entire body!
-- Read the evidence token located on the staged item.
+- Confirm the staged item's identity on its evidence tag and submit your verified flag:
+  `FLAG{3L4_ST4G3D_W34P0N_R3V0LV3R}` *(also accepted: `REVOLVER`)*.
 
 ---
 
 ## Flag Format
 ```
-FLAG{...}
+FLAG{3L4_ST4G3D_W34P0N_R3V0LV3R}
 ```
 *Submit your verified forensic flag to complete Case 1 and clear the investigation!*

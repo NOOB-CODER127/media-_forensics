@@ -122,10 +122,10 @@ def generate_challenge_4():
     pdraw.text((20, 46), "ACCESS STATUS: ALL RESTRICTED VAULTS & ARCHIVES GRANTED", fill=(20, 30, 45), font=get_font(FONT_BOLD, 12))
     pdraw.text((20, 76), "AUTHENTICATION OVERRIDE TOKEN:", fill=(80, 85, 95), font=get_font(FONT_BOLD, 11))
 
-    # Official Flag in forged block
-    flag_str = "FLAG{3L4_R0GU3_CL34R4NC3_0V3RR1D3}"
+    # Official authentication override code in forged block
+    auth_str = "AUTH OVERRIDE: CL34R4NC3_0V3RR1D3 // SEC-4"
     pdraw.rectangle([(16, 96), (545, 138)], fill=(240, 244, 250), outline=(20, 30, 45), width=1)
-    pdraw.text((26, 105), flag_str, fill=(10, 20, 35), font=get_font(FONT_MONO, 15))
+    pdraw.text((26, 105), auth_str, fill=(10, 20, 35), font=get_font(FONT_MONO, 15))
 
     pdraw.text((20, 155), "SPECIAL ACCESS PROGRAM: PROJECT CERBERUS [VAULT 04]", fill=(195, 20, 20), font=get_font(FONT_BOLD, 11))
     pdraw.text((20, 178), "DIGITAL STAMP: #VERIFIED-AUTH-0994-OVERRIDE", fill=(70, 75, 85), font=get_font(FONT_MONO, 10))

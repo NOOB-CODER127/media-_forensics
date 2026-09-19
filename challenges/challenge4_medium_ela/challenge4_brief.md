@@ -52,12 +52,14 @@ As the forensic image analyst, your task is to perform **Error Level Analysis (E
 - Inspect the badge:
   - The photo, barcode, agency banner, and background remain dark.
   - The lower-right clearance section illuminates with sharp, multi-colored artifact noise!
-- Zoom into the glowing box to recover the unauthorized override token.
+- Zoom into the glowing box to recover the unauthorized override code (`CL34R4NC3_0V3RR1D3`).
+- Submit your recovered override flag:
+  `FLAG{3L4_R0GU3_CL34R4NC3_0V3RR1D3}` *(also accepted: `CL34R4NC3_0V3RR1D3`)*.
 
 ---
 
 ## Flag Format
 ```
-FLAG{...}
+FLAG{3L4_R0GU3_CL34R4NC3_0V3RR1D3}
 ```
-*Submit your verified forensic flag to clear Case File #SEC-2026-089!*
+*Submit your verified override token on the Lab Portal to confirm the clearance breach!*
