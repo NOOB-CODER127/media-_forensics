@@ -11,11 +11,11 @@
 ## Case Scenario
 At 02:15 AM, security personnel at the High-Security Biometrics & Research Vault detained an individual attempting to enter the Special Access Program facility. The individual presented a laminated departmental security clearance badge (`evidence_clearance_badge.jpg`). 
 
-Visually, the badge appears to grant **LEVEL 4 (TOP SECRET / SCI)** access with an official approval stamp and a digital crypto-override token.
+Visually, the badge appears to be a legitimate credential formatted with official corporate styling, displaying multiple authentication tokens across all sections (Operative Token, Assigned Sector Code, Expiration Audit Token, Hardware Chip UID, and Clearance Token).
 
-However, a query to the central personnel database indicates the contractor was only ever granted **LEVEL 1 (RESTRICTED VISITOR)** privileges. Physical security suspects the badge image was digitally forged by compositing an unauthorized Level 4 credential patch prior to lamination.
+However, a query to the central personnel database indicates the contractor was only ever granted **LEVEL 1 (RESTRICTED VISITOR)** privileges. Physical security suspects the badge image was digitally forged by splicing a Level 4 credential block into the official layout prior to lamination.
 
-As the forensic image analyst, your task is to perform **Error Level Analysis (ELA)** on the badge photograph to expose the digital forgery, identify the spliced region, and retrieve the rogue override token.
+As the forensic image analyst, your task is to perform **Error Level Analysis (ELA)** on the badge photograph to expose the digital forgery, identify which of the credential fields was spliced, and retrieve the rogue clearance token.
 
 ---
 
@@ -48,11 +48,10 @@ As the forensic image analyst, your task is to perform **Error Level Analysis (E
 
 ### Step 5: Contrast & Level Amplification
 - Create a combined analysis layer: `Layer -> New from Visible`.
-- Boost brightness: Go to `Colors -> Levels...` and pull the white point slider down, or go to `Colors -> Brightness-Contrast` and increase Brightness.
 - Inspect the badge:
-  - The photo, barcode, agency banner, and background remain dark.
-  - The lower-right clearance section illuminates with sharp, multi-colored artifact noise!
-- Zoom into the glowing box to recover the unauthorized override code (`CL34R4NC3_0V3RR1D3`).
+  - The photo, barcode, agency banner, operative details, and expiration fields remain dark.
+  - The lower-right clearance section illuminates with sharp, multi-colored artifact noise (~6x compression error differential)!
+- Identify the spliced clearance box and extract the fraudulent token: `CL34R4NC3_0V3RR1D3`.
 - Submit your recovered override flag:
   `FLAG{3L4_R0GU3_CL34R4NC3_0V3RR1D3}` *(also accepted: `CL34R4NC3_0V3RR1D3`)*.
 

@@ -61,18 +61,14 @@ JPEG compression divides images into 8x8 pixel blocks and quantizes frequency co
 
 #### Step 6: Analyze the Illuminated Forensic Anomalies
 Inspect the amplified difference canvas:
-1. **Evidence Markers A & B:** Note that only their outer silhouette outlines show thin white lines (natural edge frequency). Their flat yellow bodies remain dark, matching the wooden floor.
-2. **Victim's Body & Bedding:** Exhibit uniform, low-level error across fabric folds.
-3. **The Staged Revolver:** Near the victim's left hand on the blood pool (`X: 250–470, Y: 490–615`), an entire object glows intensely with multi-colored, high-amplitude error across its cylinder, barrel, grip, and attached rectangular tag! This confirms it was digitally inserted.
+1. **Evidence Markers A & B:** Note that only their outer silhouette outlines show thin white lines (natural edge frequency). Their flat yellow bodies remain dark, matching the ambient wooden floor.
+2. **Victim's Body & Bedding:** Exhibit uniform, low-level compression error across skin and fabric folds.
+3. **The Staged Revolver:** Near the victim's left hand in the blood pool (`X: 250–470, Y: 490–615`), the revolver glows intensely with bright, multi-colored, high-amplitude error across its cylinder, barrel, and grip! This 3x compression error spike proves it was digitally composited into the photo after the crime scene was shot.
 
 #### Step 7: Identify the Staged Item & Retrieve Flag
-1. Zoom in closely on the glowing object at `X: 250–470, Y: 490–615`.
-2. The tag attached to the weapon confirms its identification:
-```
-FORENSIC EVIDENCE TAG #01-W
-ITEM: REVOLVER (.38 SPECIAL)
-```
-3. Because ELA proves that the revolver is the staged evidence item (while cones A and B are authentic), format the verified finding flag:
+1. Inspect the glowing region at `X: 250–470, Y: 490–615` in GIMP.
+2. ELA confirms that the revolver is the single staged piece of physical evidence (while markers A and B are native to the original photo).
+3. Format the verified finding flag:
 ```
 FLAG{3L4_ST4G3D_W34P0N_R3V0LV3R}
 ```

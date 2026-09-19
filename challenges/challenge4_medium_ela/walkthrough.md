@@ -53,17 +53,17 @@ When an authentic credential document or badge is generated and saved as a JPEG,
    *(Alternatively, go to `Colors -> Brightness-Contrast...` and increase both Brightness and Contrast by ~30x)*.
 3. Click **OK**.
 
-#### Step 6: Identify the Forged Clearance Rectangle
+#### Step 6: Identify the Forged Clearance Block
 Examine the amplified difference output across the badge:
-1. The Department emblem, operative photo, barcode, and personal text fields remain dark and uniform (error rate ~0.15).
-2. The entire lower-right authorization block (`X: 310 to 875, Y: 350 to 560`) illuminates with extreme brightness and intense multi-colored noise (error rate ~2.55, a **16x anomaly**).
-3. The crisp rectangular border clearly delineates where the digital crop was spliced over the original Level 1 field.
+1. **Authentic Fields:** The operative photo, barcode, security chip, operative details (`OP_VANCE_90421`), facility sector (`SEC4_EXT_0994`), and expiration date (`AUD_PASS_2028`) remain completely dark and uniform (error rate ~0.15).
+2. **Forged Spliced Block:** The entire lower-right clearance classification block (`X: 310 to 885, Y: 335 to 555`) illuminates with sharp brightness and multi-colored compression noise (error rate ~0.92, a **6x anomaly ratio**).
+3. The crisp rectangular border clearly delineates where the digital Level 4 block was composited over the original Level 1 section.
 
-#### Step 7: Read the Override Token & Flag
-1. Zoom in on the glowing clearance authorization block (`X: 310 to 875, Y: 350 to 560`).
-2. Read the spliced authorization override code inside the glowing box:
+#### Step 7: Read the Fraudulent Clearance Token & Flag
+1. Zoom in on the glowing clearance block (`X: 310 to 885, Y: 335 to 555`).
+2. Read the token associated with the spliced credential:
 ```
-AUTH OVERRIDE: CL34R4NC3_0V3RR1D3 // SEC-4
+SECURITY CLEARANCE TOKEN: CL34R4NC3_0V3RR1D3
 ```
 3. Format the official flag:
 ```

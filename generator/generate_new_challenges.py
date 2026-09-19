@@ -81,26 +81,29 @@ def generate_challenge_4():
     # Security Chip Icon
     draw.rounded_rectangle([(45, 490), (115, 545)], radius=6, fill=(212, 175, 55), outline=(160, 130, 30), width=2)
     draw.rectangle([(65, 498), (95, 537)], outline=(140, 110, 20), width=1)
+    draw.text((130, 505), "SEC-CHIP UID: 8841-A", fill=(100, 110, 125), font=get_font(FONT_MONO, 11))
+    draw.text((130, 525), "HARDWARE TOKEN: HW_90421_OK", fill=(100, 110, 125), font=get_font(FONT_MONO, 10))
 
     # Right Column: Personal & Facility Information
     f_lbl = get_font(FONT_BOLD, 12)
     f_val = get_font(FONT_MONO, 14)
     draw.text((310, 125), "OPERATIVE NAME:", fill=(85, 95, 110), font=f_lbl)
-    draw.text((310, 143), "ADRIAN VANCE", fill=(14, 24, 42), font=f_val)
+    draw.text((310, 143), "ADRIAN VANCE  [TOKEN: OP_VANCE_90421]", fill=(14, 24, 42), font=f_val)
 
-    draw.text((310, 180), "CREDENTIAL CLASSIFICATION:", fill=(85, 95, 110), font=f_lbl)
-    draw.text((310, 198), "CLASS-B TECHNICAL CONTRACTOR", fill=(14, 24, 42), font=f_val)
+    draw.text((310, 175), "CREDENTIAL CLASSIFICATION:", fill=(85, 95, 110), font=f_lbl)
+    draw.text((310, 193), "CLASS-B TECHNICAL CONTRACTOR", fill=(14, 24, 42), font=f_val)
 
-    draw.text((310, 235), "AUTHORIZED FACILITY ACCESS:", fill=(85, 95, 110), font=f_lbl)
-    draw.text((310, 253), "SECTOR-4 EXTERIOR // GENERAL LABS", fill=(14, 24, 42), font=f_val)
+    draw.text((310, 225), "ASSIGNED FACILITY SECTOR:", fill=(85, 95, 110), font=f_lbl)
+    draw.text((310, 243), "SECTOR-4 EXTERIOR // GENERAL LABS  [CODE: SEC4_EXT_0994]", fill=(14, 24, 42), font=get_font(FONT_MONO, 12))
 
-    draw.text((310, 290), "EXPIRATION DATE:", fill=(85, 95, 110), font=f_lbl)
-    draw.text((310, 308), "2028-11-30 // RENEWAL MANDATORY", fill=(14, 24, 42), font=f_val)
+    draw.text((310, 275), "EXPIRATION & AUDIT:", fill=(85, 95, 110), font=f_lbl)
+    draw.text((310, 293), "2028-11-30 // AUDIT: AUD_PASS_2028", fill=(14, 24, 42), font=get_font(FONT_MONO, 12))
 
     # Original Base Clearance Section (Level 1)
-    draw.rectangle([(310, 350), (875, 560)], fill=(228, 234, 242), outline=(170, 180, 195), width=2)
-    draw.text((330, 370), "CLEARANCE: LEVEL 1 (RESTRICTED VISITOR)", fill=(110, 120, 135), font=get_font(FONT_BOLD, 15))
-    draw.text((330, 400), "STATUS: VISITOR PASS // ESCORT REQUIRED AT ALL TIMES", fill=(130, 140, 155), font=get_font(FONT_MONO, 11))
+    draw.rectangle([(310, 335), (885, 555)], fill=(234, 239, 246), outline=(180, 190, 205), width=2)
+    draw.text((330, 355), "CLEARANCE CLASSIFICATION: LEVEL 1 (RESTRICTED VISITOR)", fill=(100, 110, 125), font=get_font(FONT_BOLD, 14))
+    draw.text((330, 385), "FACILITY ACCESS: RESTRICTED VISITOR PASS // ESCORT REQUIRED", fill=(110, 120, 135), font=get_font(FONT_MONO, 11))
+    draw.text((330, 415), "SECURITY CLEARANCE TOKEN: VIS_LVL1_STANDARD", fill=(120, 130, 145), font=get_font(FONT_MONO, 11))
 
     # Bottom Document Footer
     draw.text((310, 580), "DOCUMENT SEC-889-V | DO NOT DUPLICATE | PROPERTY OF THE FEDERAL FORENSICS ADMIN", fill=(130, 140, 155), font=get_font(FONT_MONO, 9))
@@ -111,34 +114,22 @@ def generate_challenge_4():
     buf_base.seek(0)
     base_q70 = Image.open(buf_base).convert("RGB")
 
-    # 2. Render the fraudulent clearance patch (Level 4 + Stamp + Crypto Flag)
-    patch_w = 565
-    patch_h = 210
-    patch = Image.new("RGB", (patch_w, patch_h), color=(253, 249, 247))
+    # 2. Render fraudulent clearance patch (Level 4 matching authentic style)
+    patch_w = 575
+    patch_h = 220
+    patch = Image.new("RGB", (patch_w, patch_h), color=(234, 239, 246))
     pdraw = ImageDraw.Draw(patch)
-    pdraw.rectangle([(0, 0), (patch_w - 1, patch_h - 1)], outline=(195, 25, 25), width=3)
+    pdraw.rectangle([(0, 0), (patch_w - 1, patch_h - 1)], outline=(180, 190, 205), width=2)
 
-    pdraw.text((20, 16), "SECURITY CLEARANCE: LEVEL 4 (TOP SECRET / SCI)", fill=(195, 20, 20), font=get_font(FONT_BOLD, 16))
-    pdraw.text((20, 46), "ACCESS STATUS: ALL RESTRICTED VAULTS & ARCHIVES GRANTED", fill=(20, 30, 45), font=get_font(FONT_BOLD, 12))
-    pdraw.text((20, 76), "AUTHENTICATION OVERRIDE TOKEN:", fill=(80, 85, 95), font=get_font(FONT_BOLD, 11))
-
-    # Official authentication override code in forged block
-    auth_str = "AUTH OVERRIDE: CL34R4NC3_0V3RR1D3 // SEC-4"
-    pdraw.rectangle([(16, 96), (545, 138)], fill=(240, 244, 250), outline=(20, 30, 45), width=1)
-    pdraw.text((26, 105), auth_str, fill=(10, 20, 35), font=get_font(FONT_MONO, 15))
-
-    pdraw.text((20, 155), "SPECIAL ACCESS PROGRAM: PROJECT CERBERUS [VAULT 04]", fill=(195, 20, 20), font=get_font(FONT_BOLD, 11))
-    pdraw.text((20, 178), "DIGITAL STAMP: #VERIFIED-AUTH-0994-OVERRIDE", fill=(70, 75, 85), font=get_font(FONT_MONO, 10))
-
-    # Red authorization circular stamp
-    stamp_x, stamp_y, stamp_r = patch_w - 95, 80, 50
-    pdraw.ellipse([(stamp_x - stamp_r, stamp_y - stamp_r), (stamp_x + stamp_r, stamp_y + stamp_r)], outline=(200, 25, 25), width=3)
-    pdraw.ellipse([(stamp_x - stamp_r + 5, stamp_y - stamp_r + 5), (stamp_x + stamp_r - 5, stamp_y + stamp_r - 5)], outline=(200, 25, 25), width=1)
-    pdraw.text((stamp_x - 38, stamp_y - 10), "APPROVED", fill=(200, 25, 25), font=get_font(FONT_BOLD, 13))
+    pdraw.text((20, 20), "CLEARANCE CLASSIFICATION: LEVEL 4 (TOP SECRET / SCI)", fill=(14, 28, 52), font=get_font(FONT_BOLD, 14))
+    pdraw.text((20, 50), "FACILITY ACCESS: ALL RESTRICTED VAULTS & ARCHIVES GRANTED", fill=(14, 28, 52), font=get_font(FONT_MONO, 11))
+    pdraw.text((20, 80), "SECURITY CLEARANCE TOKEN: CL34R4NC3_0V3RR1D3", fill=(14, 28, 52), font=get_font(FONT_MONO, 12))
+    pdraw.text((20, 110), "SPECIAL ACCESS PROGRAM: PROJECT CERBERUS [VAULT 04]", fill=(14, 28, 52), font=get_font(FONT_MONO, 11))
+    pdraw.text((20, 140), "DIGITAL AUTHENTICATION: #SEC-90421-CERBERUS-VALID", fill=(100, 110, 125), font=get_font(FONT_MONO, 10))
 
     # 3. Paste fraudulent patch onto base
     composite = base_q70.copy()
-    composite.paste(patch, (310, 350))
+    composite.paste(patch, (310, 335))
 
     # 4. Save final challenge image as scanned JPEG at Quality = 95
     out_badge = os.path.join(CH4_DIR, "evidence_clearance_badge.jpg")
@@ -155,6 +146,9 @@ def generate_challenge_4():
     ela_enhanced = ImageEnhance.Brightness(diff).enhance(30.0)
     ref_ela = os.path.join(SOL4_DIR, "reference_badge_ela.png")
     ela_enhanced.save(ref_ela)
+    sol_master_badge = os.path.join(BASE_DIR, "solutions", "challenge4_medium_ela", "recovered_badge_ela.png")
+    if os.path.exists(os.path.dirname(sol_master_badge)):
+        ela_enhanced.save(sol_master_badge)
     print(f"  [+] Saved reference ELA {ref_ela}")
 
 

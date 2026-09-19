@@ -308,7 +308,7 @@ def generate_challenge_2():
 def generate_challenge_3():
     print("[*] Generating Challenge 3 [HARD] (Crime Scene ELA Manipulation)...")
     os.makedirs(CH3_DIR, exist_ok=True)
-    sol_dir = os.path.join(CH3_DIR, "solution")
+    sol_dir = os.path.join(BASE_DIR, "solutions", "challenge3_ela")
     os.makedirs(sol_dir, exist_ok=True)
 
     if not os.path.exists(ORIGINAL_CRIME_SCENE):
@@ -318,9 +318,9 @@ def generate_challenge_3():
     orig = Image.open(ORIGINAL_CRIME_SCENE).convert("RGB")
     w, h = orig.size
 
-    # 1. Establish baseline JPEG compression for the room: Quality = 75
+    # 1. Establish baseline JPEG compression for the room: Quality = 68
     buf_base = io.BytesIO()
-    orig.save(buf_base, format="JPEG", quality=75)
+    orig.save(buf_base, format="JPEG", quality=68)
     buf_base.seek(0)
     base_img = Image.open(buf_base).convert("RGB")
 
@@ -328,21 +328,11 @@ def generate_challenge_3():
     gun_box = (250, 490, 470, 615)
     gun_crop = orig.crop(gun_box)
 
-    # 3. Add authentic forensic evidence tag next to the staged weapon
-    card_w, card_h = 205, 26
-    card = Image.new("RGB", (card_w, card_h), color=(244, 244, 238))
-    cdraw = ImageDraw.Draw(card)
-    cdraw.rectangle([(0, 0), (card_w - 1, card_h - 1)], outline=(40, 40, 40), width=1)
-    font_mono = get_font(FONT_MONO, 8)
-    cdraw.text((6, 3), "FORENSIC EVIDENCE TAG #01-W", font=font_mono, fill=(190, 25, 25))
-    cdraw.text((6, 14), "ITEM: REVOLVER (.38 SPECIAL)", font=font_mono, fill=(35, 35, 35))
-
-    gun_crop.paste(card, (5, 90))
-
-    # Mask covering the gun body and the evidence tag with smooth boundary
+    # 3. Mask covering the revolver body with smooth anti-aliased boundary
+    # No artificial cards or labels - realistic crime scene photograph
     mask = Image.new("L", gun_crop.size, 0)
     mdraw = ImageDraw.Draw(mask)
-    mdraw.polygon([(15, 40), (60, 10), (185, 40), (195, 65), (215, 90), (215, 120), (2, 120), (2, 75)], fill=255)
+    mdraw.polygon([(25, 45), (75, 15), (195, 40), (205, 75), (160, 115), (60, 115), (25, 80)], fill=255)
     mask = mask.filter(ImageFilter.GaussianBlur(1.5))
 
     # 4. Composite tampered region onto the baseline room image
@@ -354,6 +344,11 @@ def generate_challenge_3():
     tampered.save(output_crime_scene_jpg, format="JPEG", quality=95)
     print(f"  [+] Saved {output_crime_scene_jpg}")
 
+    # Copy to server/public
+    server_pub_jpg = os.path.join(BASE_DIR, "server", "public", "crime_scene_evidence.jpg")
+    if os.path.exists(os.path.dirname(server_pub_jpg)):
+        tampered.save(server_pub_jpg, format="JPEG", quality=95)
+
     # 6. Generate reference solution ELA image
     buf_resaved = io.BytesIO()
     tampered.save(buf_resaved, format="JPEG", quality=90)
@@ -364,6 +359,9 @@ def generate_challenge_3():
     ela_enhanced = ImageEnhance.Brightness(diff).enhance(30.0)
     ref_ela_path = os.path.join(sol_dir, "reference_crime_scene_ela.png")
     ela_enhanced.save(ref_ela_path)
+    sol_master_path = os.path.join(BASE_DIR, "solutions", "challenge3_ela", "crime_scene_ela_result.png")
+    if os.path.exists(os.path.dirname(sol_master_path)):
+        ela_enhanced.save(sol_master_path)
     print(f"  [+] Saved reference ELA {ref_ela_path}")
 
 

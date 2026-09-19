@@ -63,9 +63,9 @@ As the Senior Forensic Image Analyst, you have been brought in to perform **Erro
   - Go to `Colors -> Levels...`.
   - Drag the right-hand white slider significantly to the left (e.g. input levels `0` to `25` or `30`), or go to `Colors -> Brightness-Contrast` and boost brightness.
 - Zoom in and inspect the scene:
-  - The floor, victim, and blood pool remain dark.
-  - One specific staged physical item illuminates brightly with multi-colored artifact noise across its entire body!
-- Confirm the staged item's identity on its evidence tag and submit your verified flag:
+  - The floor, victim, bedding, and evidence markers A & B remain dark.
+  - Near the victim's hand, the revolver illuminates brightly with high-amplitude multi-colored compression noise across its body, proving it was digitally staged into the blood pool!
+- Identify the staged weapon and submit your verified flag:
   `FLAG{3L4_ST4G3D_W34P0N_R3V0LV3R}` *(also accepted: `REVOLVER`)*.
 
 ---

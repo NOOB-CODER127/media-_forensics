@@ -79,13 +79,9 @@
    - Go to `Colors -> Levels...`. Drag the white input slider from 255 down to **15 – 25** (or use `Colors -> Brightness-Contrast` and maximize contrast).
 6. **Forensic Analysis:**
    - Notice yellow markers A & B only have thin edge outlines, while their interior bodies are dark (natural high-frequency edges).
-   - Near the victim's hand (`X: 250–470, Y: 490–615`), the **entire body of the revolver and its attached evidence tag** glow brightly with intense multi-colored noise, proving it was digitally inserted.
-7. **Identify Staged Weapon & Flag:** Zoom into the glowing tag attached below the cylinder:
-   ```
-   FORENSIC EVIDENCE TAG #01-W
-   ITEM: REVOLVER (.38 SPECIAL)
-   ```
-   Because ELA confirms the revolver was staged into the scene, format the flag as:
+   - Near the victim's hand (`X: 250–470, Y: 490–615`), the **entire structure of the revolver in the blood pool** glows brightly with intense multi-colored noise, proving it was digitally staged into the photo.
+7. **Identify Staged Weapon & Flag:** Inspect the glowing weapon in GIMP:
+   Because ELA confirms the revolver was the only staged evidence item (while cones A and B are authentic), format the flag as:
    ```
    FLAG{3L4_ST4G3D_W34P0N_R3V0LV3R}
    ```
@@ -99,19 +95,19 @@
 - **Core Concept:** Document Integrity Forensics & Compression Generation Differentials
 
 ### Forensic Investigation Steps:
-1. **Open Badge in GIMP:** Open `evidence_clearance_badge.jpg`. Visually, the badge appears authentic and approved for Level 4.
+1. **Open Badge in GIMP:** Open `evidence_clearance_badge.jpg`. Visually, the badge appears authentic and displays official tokens across all sections (`OP_VANCE_90421`, `SEC4_EXT_0994`, `AUD_PASS_2028`, etc.).
 2. **Export Reference Copy at 90%:** Go to `File -> Export As...` -> save as `temp_badge_resave.jpg` with **Quality = 90%**.
 3. **Open as Layer:** Go to `File -> Open as Layers...` -> select `temp_badge_resave.jpg`.
 4. **Set Mode to Difference:** Change the top layer Mode to **Difference**.
 5. **Amplify Artifacts:**
    - Choose `Layer -> New from Visible`.
    - Open `Colors -> Levels...` and drag the white input slider to **20 – 30**.
-6. **Locate the Forgery:**
-   - The photo, barcode, and header text stay dark and uniform.
-   - The entire lower-right authorization block (`X: 310 to 875, Y: 350 to 560`) illuminates intensely with a **16x error differential**, revealing the spliced rectangular crop boundary.
-7. **Read Override Code & Flag:** Zoom into the glowing authorization box:
+6. **Locate the Forged Credential Block:**
+   - The photo, barcode, operative name, facility sector, and expiration date remain dark and uniform.
+   - The lower-right clearance classification block (`X: 310 to 885, Y: 335 to 555`) illuminates with sharp brightness (~6x error differential), exposing the spliced rectangle.
+7. **Read Fraudulent Token & Flag:** Zoom into the glowing clearance classification box:
    ```
-   AUTH OVERRIDE: CL34R4NC3_0V3RR1D3 // SEC-4
+   SECURITY CLEARANCE TOKEN: CL34R4NC3_0V3RR1D3
    ```
    Submit the official override flag:
    ```
