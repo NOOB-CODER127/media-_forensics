@@ -17,26 +17,33 @@ med-for-cha/
 ├── README.md                                           # Master documentation & quickstart
 │
 ├── challenges/                                         # Participant Challenge Handouts (Zero Leaks)
+│   ├── README.md                                       # Directory index & guide
+│   ├── walkthrough.md                                  # Complete unified 5-challenge participant walkthrough
 │   ├── challenge1_audio/                               # [EASY] Audio Forensics & Spectrogram
 │   │   ├── intercepted_wiretap.wav                     # 16-second radio audio (16-bit 44.1kHz Mono)
-│   │   └── challenge1_brief.md                         # Case brief & attendee instructions
+│   │   ├── challenge1_brief.md                         # Case brief & attendee instructions
+│   │   └── walkthrough.md                              # Audacity step-by-step participant walkthrough
 │   │
 │   ├── challenge2_video/                               # [MEDIUM] Video Forensics & License Plate De-blur
 │   │   ├── surveillance_traffic.mp4                    # Real 1280x720 24fps traffic camera recording
 │   │   ├── frames/                                     # Pre-extracted lossless PNG frames (#001 to #240)
-│   │   └── challenge2_brief.md                         # Case brief & attendee instructions
+│   │   ├── challenge2_brief.md                         # Case brief & attendee instructions
+│   │   └── walkthrough.md                              # VLC & GIMP step-by-step participant walkthrough
 │   │
 │   ├── challenge3_ela/                                 # [HARD] Crime Scene Image Forensics & ELA
 │   │   ├── crime_scene_evidence.jpg                    # Forensic crime scene photo with staged revolver
-│   │   └── challenge3_brief.md                         # Case 1 homicide investigation briefing (GIMP instructions)
+│   │   ├── challenge3_brief.md                         # Case 1 homicide investigation briefing
+│   │   └── walkthrough.md                              # GIMP 5-step ELA participant walkthrough
 │   │
 │   ├── challenge4_medium_ela/                          # [MEDIUM] Document Forensics & ELA
 │   │   ├── evidence_clearance_badge.jpg                # Security access ID badge with forged clearance
-│   │   └── challenge4_brief.md                         # Case brief & instructions (GIMP instructions)
+│   │   ├── challenge4_brief.md                         # Case brief & attendee instructions
+│   │   └── walkthrough.md                              # GIMP document ELA participant walkthrough
 │   │
 │   └── challenge5_medium_audio/                        # [MEDIUM] Stereo Audio Forensics & Spatial Spectrogram
 │       ├── covert_broadcast.wav                        # 18-second 44.1kHz Stereo audio recording
-│       └── challenge5_brief.md                         # Case brief & instructions
+│       ├── challenge5_brief.md                         # Case brief & attendee instructions
+│       └── walkthrough.md                              # Audacity stereo decoupling participant walkthrough
 │
 ├── solutions/                                          # Top-Level Organizer Solutions (Confidential)
 │   ├── README.md                                       # Facilitator answer keys & overview
@@ -116,6 +123,7 @@ python3 generator/generate_challenges.py
 ---
 
 ## 🖨️ Printable Facilitation Stationery
+- **[Participant Walkthrough Guide](file:///home/prab/med-for-cha/handouts/Participant_Walkthrough_Guide.md):** Step-by-step attendee walkthroughs for all 5 challenges using Audacity, VLC, and GIMP (zero Python references).
 - **[Participant Cheat Sheet](file:///home/prab/med-for-cha/handouts/Participant_Brief_and_CheatSheet.md):** Print 1 copy per attendee.
 - **[Batch Score Sheet](file:///home/prab/med-for-cha/handouts/Batch_Score_Sheet.md):** Print 1 copy per batch (3 batches = 45 daily capacity).
 - **[Instructor Facilitation Playbook](file:///home/prab/med-for-cha/handouts/Instructor_Guide_and_Timeline.md):** Timed hint ladders (@ 10m, 18m, 25m / 15m, 30m, 40m) and live demo talking points.

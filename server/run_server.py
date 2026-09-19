@@ -62,8 +62,10 @@ def prepare_downloads():
     ch5_dir = os.path.join(BASE_DIR, "challenges", "challenge5_medium_audio")
 
     sol_dir = os.path.join(BASE_DIR, "solutions")
+    handouts_dir = os.path.join(BASE_DIR, "handouts")
     os.system(f"cp {os.path.join(ch3_dir, 'crime_scene_evidence.jpg')} {PUBLIC_DIR}/crime_scene_evidence.jpg 2>/dev/null || true")
     os.system(f"cp {os.path.join(sol_dir, 'offline_ela_viewer.html')} {PUBLIC_DIR}/ela_tool.html 2>/dev/null || true")
+    os.system(f"cp {os.path.join(handouts_dir, 'Participant_Walkthrough_Guide.md')} {DOWNLOADS_DIR}/Participant_Walkthrough_Guide.md 2>/dev/null || true")
 
     # Challenge 1 (Audio - Easy)
     build_zip_package(
@@ -71,6 +73,8 @@ def prepare_downloads():
         [
             (os.path.join(ch1_dir, "intercepted_wiretap.wav"), "intercepted_wiretap.wav"),
             (os.path.join(ch1_dir, "challenge1_brief.md"), "challenge1_brief.md"),
+            (os.path.join(ch1_dir, "walkthrough.md"), "walkthrough.md"),
+            (os.path.join(ch1_dir, "participant_walkthrough.md"), "participant_walkthrough.md"),
         ]
     )
 
@@ -80,6 +84,8 @@ def prepare_downloads():
         [
             (os.path.join(ch2_dir, "surveillance_traffic.mp4"), "surveillance_traffic.mp4"),
             (os.path.join(ch2_dir, "challenge2_brief.md"), "challenge2_brief.md"),
+            (os.path.join(ch2_dir, "walkthrough.md"), "walkthrough.md"),
+            (os.path.join(ch2_dir, "participant_walkthrough.md"), "participant_walkthrough.md"),
             (os.path.join(ch2_dir, "frames"), "frames"),
         ]
     )
@@ -90,6 +96,8 @@ def prepare_downloads():
         [
             (os.path.join(ch3_dir, "crime_scene_evidence.jpg"), "crime_scene_evidence.jpg"),
             (os.path.join(ch3_dir, "challenge3_brief.md"), "challenge3_brief.md"),
+            (os.path.join(ch3_dir, "walkthrough.md"), "walkthrough.md"),
+            (os.path.join(ch3_dir, "participant_walkthrough.md"), "participant_walkthrough.md"),
         ]
     )
 
@@ -99,6 +107,8 @@ def prepare_downloads():
         [
             (os.path.join(ch4_dir, "evidence_clearance_badge.jpg"), "evidence_clearance_badge.jpg"),
             (os.path.join(ch4_dir, "challenge4_brief.md"), "challenge4_brief.md"),
+            (os.path.join(ch4_dir, "walkthrough.md"), "walkthrough.md"),
+            (os.path.join(ch4_dir, "participant_walkthrough.md"), "participant_walkthrough.md"),
         ]
     )
 
@@ -108,6 +118,8 @@ def prepare_downloads():
         [
             (os.path.join(ch5_dir, "covert_broadcast.wav"), "covert_broadcast.wav"),
             (os.path.join(ch5_dir, "challenge5_brief.md"), "challenge5_brief.md"),
+            (os.path.join(ch5_dir, "walkthrough.md"), "walkthrough.md"),
+            (os.path.join(ch5_dir, "participant_walkthrough.md"), "participant_walkthrough.md"),
         ]
     )
 
@@ -117,16 +129,28 @@ def prepare_downloads():
         [
             (os.path.join(ch1_dir, "intercepted_wiretap.wav"), "challenge1_audio/intercepted_wiretap.wav"),
             (os.path.join(ch1_dir, "challenge1_brief.md"), "challenge1_audio/challenge1_brief.md"),
+            (os.path.join(ch1_dir, "walkthrough.md"), "challenge1_audio/walkthrough.md"),
+            (os.path.join(ch1_dir, "participant_walkthrough.md"), "challenge1_audio/participant_walkthrough.md"),
             (os.path.join(ch2_dir, "surveillance_traffic.mp4"), "challenge2_video/surveillance_traffic.mp4"),
             (os.path.join(ch2_dir, "challenge2_brief.md"), "challenge2_video/challenge2_brief.md"),
+            (os.path.join(ch2_dir, "walkthrough.md"), "challenge2_video/walkthrough.md"),
+            (os.path.join(ch2_dir, "participant_walkthrough.md"), "challenge2_video/participant_walkthrough.md"),
             (os.path.join(ch2_dir, "frames"), "challenge2_video/frames"),
             (os.path.join(ch3_dir, "crime_scene_evidence.jpg"), "challenge3_ela/crime_scene_evidence.jpg"),
             (os.path.join(ch3_dir, "challenge3_brief.md"), "challenge3_brief.md"),
+            (os.path.join(ch3_dir, "walkthrough.md"), "challenge3_ela/walkthrough.md"),
+            (os.path.join(ch3_dir, "participant_walkthrough.md"), "challenge3_ela/participant_walkthrough.md"),
             (os.path.join(ch4_dir, "evidence_clearance_badge.jpg"), "challenge4_medium_ela/evidence_clearance_badge.jpg"),
             (os.path.join(ch4_dir, "challenge4_brief.md"), "challenge4_medium_ela/challenge4_brief.md"),
+            (os.path.join(ch4_dir, "walkthrough.md"), "challenge4_medium_ela/walkthrough.md"),
+            (os.path.join(ch4_dir, "participant_walkthrough.md"), "challenge4_medium_ela/participant_walkthrough.md"),
             (os.path.join(ch5_dir, "covert_broadcast.wav"), "challenge5_medium_audio/covert_broadcast.wav"),
             (os.path.join(ch5_dir, "challenge5_brief.md"), "challenge5_medium_audio/challenge5_brief.md"),
+            (os.path.join(ch5_dir, "walkthrough.md"), "challenge5_medium_audio/walkthrough.md"),
+            (os.path.join(ch5_dir, "participant_walkthrough.md"), "challenge5_medium_audio/participant_walkthrough.md"),
+            (os.path.join(BASE_DIR, "challenges", "README.md"), "README.md"),
             (os.path.join(BASE_DIR, "handouts", "Participant_Brief_and_CheatSheet.md"), "Participant_CheatSheet.md"),
+            (os.path.join(BASE_DIR, "handouts", "Participant_Walkthrough_Guide.md"), "Participant_Walkthrough_Guide.md"),
         ]
     )
     print("[+] Zip archives ready in server/public/downloads/")

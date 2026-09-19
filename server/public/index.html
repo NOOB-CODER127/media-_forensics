@@ -346,12 +346,17 @@
     <!-- All in One Download Banner -->
     <div class="all-download-box">
       <div class="all-download-info">
-        <h3>Download Full Investigation Suite (All 3 Challenges)</h3>
-        <p>Includes intercepted audio wiretap, surveillance video, crime scene photograph, and offline inspection tools.</p>
+        <h3>Download Full Investigation Suite (All 5 Challenges)</h3>
+        <p>Includes audio wiretaps, surveillance video frames, crime scene photos, credential badge, and participant walkthrough guides.</p>
       </div>
-      <a href="downloads/all_challenges_bundle.zip" class="btn-mega" download>
-        ⬇ Download Complete Suite (.ZIP)
-      </a>
+      <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+        <a href="downloads/all_challenges_bundle.zip" class="btn-mega" download>
+          ⬇ Download Complete Suite (.ZIP)
+        </a>
+        <a href="downloads/Participant_Walkthrough_Guide.md" class="btn-secondary" download style="padding: 12px 18px; border-radius: 8px;">
+          📖 Walkthrough Guide (.MD)
+        </a>
+      </div>
     </div>
 
     <!-- 3 Progressive Challenge Cards -->
@@ -470,6 +475,7 @@
         <button class="tab-btn" onclick="switchTab('ffmpeg')">FFmpeg Commands</button>
         <button class="tab-btn" onclick="switchTab('ela')">Crime Scene ELA Tips</button>
         <button class="tab-btn" onclick="switchTab('stereo')">Stereo Audio Guide</button>
+        <button class="tab-btn" onclick="switchTab('walkthroughs')">Participant Walkthroughs</button>
       </div>
 
       <div id="tab-schedule" class="tab-content active">
@@ -529,6 +535,33 @@ ffmpeg -ss 00:00:03.500 -i surveillance_traffic.mp4 -t 00:00:00.800 frames/apex_
            4. Set both tracks to <strong>Spectrogram View</strong> (Linear scale, 5,000 Hz – 14,000 Hz).<br>
            5. Read the first half of the flag in the Left track, and the second half in the Right track!
         </p>
+      </div>
+
+      <div id="tab-walkthroughs" class="tab-content">
+        <h3>Participant Forensic Walkthroughs &amp; Solutions</h3>
+        <p>Step-by-step procedures using GUI forensic tools (Audacity, VLC, and GIMP):</p>
+        <div style="display: grid; gap: 14px; margin-top: 15px;">
+          <div style="background: rgba(255,255,255,0.03); padding: 14px; border-radius: 8px; border-left: 3px solid #38bdf8;">
+            <strong style="color: #38bdf8;">Ch 1: Operation Whispering Wiretap (Audacity)</strong>
+            <p style="margin: 6px 0 0 0; font-size: 0.9em;">Import <code>intercepted_wiretap.wav</code> &rarr; Track dropdown <code>▼</code> &rarr; <strong>Spectrogram</strong> &rarr; <strong>Spectrogram Settings...</strong> &rarr; Scale: <strong>Linear</strong>, Min: <strong>7000 Hz</strong>, Max: <strong>16000 Hz</strong> &rarr; Zoom 2.5s–14.5s &rarr; Read <code>FLAG{SP3CTR4L_AUD10_CYPH3R}</code>.</p>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); padding: 14px; border-radius: 8px; border-left: 3px solid #fbbf24;">
+            <strong style="color: #fbbf24;">Ch 2: Operation Ghost Vehicle (VLC + GIMP)</strong>
+            <p style="margin: 6px 0 0 0; font-size: 0.9em;">Scrub video to 3.75s (Deceleration Apex Frame <strong>#090</strong>) &rarr; Open <code>frames/frame_090.png</code> in GIMP &rarr; Crop front bumper plate &rarr; <code>Filters &rarr; Enhance &rarr; Unsharp Mask</code> (Radius: 2.0, Amount: 2.2, Threshold: 2) &rarr; Boost Contrast &rarr; Read <code>VB 698 108</code> (Flag: <code>FLAG{PL4T3_VB698108_CLR}</code>).</p>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); padding: 14px; border-radius: 8px; border-left: 3px solid #f87171;">
+            <strong style="color: #f87171;">Ch 3: Case 1 - The Staged Crime Scene (GIMP)</strong>
+            <p style="margin: 6px 0 0 0; font-size: 0.9em;">Open <code>crime_scene_evidence.jpg</code> &rarr; Export reference at 90% quality (<code>temp_resave.jpg</code>) &rarr; Open as Layers &rarr; Set Mode to <strong>Difference</strong> &rarr; <code>Layer &rarr; New from Visible</code> &rarr; <code>Colors &rarr; Levels</code> (drag white slider to ~20) &rarr; Notice markers A & B only have edge noise, but the revolver near the victim's hand and its tag glow entirely &rarr; Zoom into tag &rarr; Read <code>FLAG{3L4_ST4G3D_W34P0N_R3V0LV3R}</code>.</p>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); padding: 14px; border-radius: 8px; border-left: 3px solid #a855f7;">
+            <strong style="color: #a855f7;">Ch 4: Operation Rogue Credential (GIMP)</strong>
+            <p style="margin: 6px 0 0 0; font-size: 0.9em;">Open <code>evidence_clearance_badge.jpg</code> in GIMP &rarr; Export reference at 90% quality &rarr; Open as Layers &rarr; Mode: <strong>Difference</strong> &rarr; New from Visible &rarr; Amplify Levels ~30x &rarr; Observe the 16x glowing rectangular box over the lower-right clearance field &rarr; Zoom in to read override token <code>FLAG{3L4_R0GU3_CL34R4NC3_0V3RR1D3}</code>.</p>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); padding: 14px; border-radius: 8px; border-left: 3px solid #34d399;">
+            <strong style="color: #34d399;">Ch 5: Operation Blackout Broadcast (Audacity)</strong>
+            <p style="margin: 6px 0 0 0; font-size: 0.9em;">Open <code>covert_broadcast.wav</code> in Audacity &rarr; Track dropdown <code>▼</code> &rarr; <strong>Split Stereo Track</strong> &rarr; Set both tracks to Linear Spectrogram (5000 Hz–14000 Hz) &rarr; Track 1 (Left) shows <code>FLAG{DU4L_CH4NN3L_</code> &rarr; Track 2 (Right) shows <code>ST3R30_SP3CTRUM}</code> &rarr; Concatenate: <code>FLAG{DU4L_CH4NN3L_ST3R30_SP3CTRUM}</code>.</p>
+          </div>
+        </div>
       </div>
     </div>
 
